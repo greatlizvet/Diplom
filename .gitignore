@@ -1,0 +1,6 @@
+packages
+HomeForPets/bin
+HomeForPets/obj
+HomeForPets/App_Data/Images/*
+ModelDB/obj
+ModelDB/bin
