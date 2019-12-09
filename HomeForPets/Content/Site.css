@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.anketa-image-content img {
+    width: 100%;
+}
+
+.header {
+    margin-bottom: 20px;
+}

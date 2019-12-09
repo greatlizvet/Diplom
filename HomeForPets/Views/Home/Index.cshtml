@@ -1,6 +1,23 @@
-﻿
+﻿@model IEnumerable<ModelDB.Form>
 @{
-    ViewBag.Title = "Index";
+                /**/
+
+                ViewBag.Title = "Дом для животных";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-12">
+        <h1>Найдите дом животным прямо сейчас.</h1>
+        <h3>Найдите друга и помогите обрести ему дом всего за пару кликов!</h3>
+    </div>
+</div>
+<div class="row">
+    @foreach (var m in Model)
+    {
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+            <div class="thumbnail">
+                @Html.Partial("PartialAnketa", m)
+            </div>
+        </div>
+    }
+</div>

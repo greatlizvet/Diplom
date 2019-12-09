@@ -12,6 +12,23 @@ namespace HomeForPets.Controllers
     public class FormController : Controller
     {
         PetsDbContext db = new PetsDbContext();
+        
+        public ActionResult Index(int? id)
+        {
+            if(id == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+
+            Form form = db.Forms.Find(id);
+
+            if(form == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+
+            return View(form);
+        }
 
         [HttpGet]
         public ActionResult Create()
@@ -43,10 +60,11 @@ namespace HomeForPets.Controllers
                         if (file.ContentLength > 0 && IsImage(file))
                         {
                             var imageName = Path.GetFileName(file.FileName);
-                            var path = Path.Combine(Server.MapPath("~/App_Data/Images"), imageName);
+                            var path = Path.Combine(Server.MapPath("~/Content/Images"), imageName);
+                            string dbPath = "/Content/Images/" + imageName;
                             file.SaveAs(path);
 
-                            Image savedImage = db.Images.Add(new Image { Path = path });
+                            Image savedImage = db.Images.Add(new Image { Path = dbPath });
                             images.Add(savedImage);
                         }
                     }
