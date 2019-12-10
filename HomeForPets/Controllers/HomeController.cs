@@ -12,10 +12,31 @@ namespace HomeForPets.Controllers
     {
         PetsDbContext db = new PetsDbContext();
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int? category, int? specie)
         {
-            List<Form> forms = db.Forms.ToList();
-            return View(forms);
+            IQueryable<Form> forms = db.Forms;
+
+            if(category != null && category != 0)
+            {
+                forms = forms.Where(f => f.CategoryID == category);
+            }
+
+            if(specie != null && specie != 0)
+            {
+                forms = forms.Where(f => f.SpecieID == specie);
+            }
+
+            List<Category> categories = db.Categories.ToList();
+            List<Specie> species = db.Species.ToList();
+
+            FormListViewModel formList = new FormListViewModel
+            {
+                Forms = forms.ToList(),
+                Categories = new SelectList(categories, "CategoryID", "CategoryName"),
+                Species = new SelectList(species, "SpecieID", "SpecieName")
+            };
+
+            return View(formList);
         }
 
         public ActionResult PartialAnketa()
