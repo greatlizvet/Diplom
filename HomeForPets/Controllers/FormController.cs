@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HomeForPets.Infrastructure;
-using System.IO;
 using ModelDB;
 
 namespace HomeForPets.Controllers
@@ -12,6 +11,11 @@ namespace HomeForPets.Controllers
     public class FormController : Controller
     {
         PetsDbContext db = new PetsDbContext();
+
+        public void AddDefault()
+        {
+            db.Images.Add(new Image { Path = "/Content/Images/default.jpg" });
+        }
         
         public ActionResult Index(int? id)
         {
@@ -33,12 +37,16 @@ namespace HomeForPets.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            SelectList categories = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            SelectList species = new SelectList(db.Species, "SpecieID", "SpecieName");
-            ViewBag.Categories = categories;
-            ViewBag.Species = species;
+            List<Category> categories = db.Categories.ToList();
+            List<Specie> species = db.Species.ToList();
 
-            return View();
+            FormCreateViewModel formCreate = new FormCreateViewModel
+            {
+                Categories = new SelectList(categories, "CategoryID", "CategoryName"),
+                Specie = new SelectList(species, "SpecieID", "SpecieName")
+            };
+
+            return View(formCreate);
         }
         
         [HttpPost]
@@ -46,28 +54,18 @@ namespace HomeForPets.Controllers
         public ActionResult Create(Form form, HttpPostedFileBase[] files)
         {
             List<Image> images = new List<Image>();
-            
+
             if(ModelState.IsValid)
             {
                 form.CreateDate = DateTime.Now;
                 //Временная заглушка
                 form.ProfileID = 1;
-                
-                foreach (var file in files)
-                {
-                    if(file != null)
-                    {
-                        if (file.ContentLength > 0 && IsImage(file))
-                        {
-                            var imageName = Path.GetFileName(file.FileName);
-                            var path = Path.Combine(Server.MapPath("~/Content/Images"), imageName);
-                            string dbPath = "/Content/Images/" + imageName;
-                            file.SaveAs(path);
 
-                            Image savedImage = db.Images.Add(new Image { Path = dbPath });
-                            images.Add(savedImage);
-                        }
-                    }
+                images = form.SaveImage(files);
+
+                foreach(var img in images)
+                {
+                    db.Images.Add(img);
                 }
 
                 foreach (var img in images)
@@ -82,25 +80,6 @@ namespace HomeForPets.Controllers
             }
 
             return Create();
-        }
-
-        private bool IsImage(HttpPostedFileBase img)
-        {
-            switch(img.ContentType)
-            {
-                case "image/jpeg":
-                    {
-                        return true;
-                    }
-                case "image/png":
-                    {
-                        return true;
-                    }
-                default:
-                    {
-                        return false;
-                    }
-            }
         }
     }
 }
