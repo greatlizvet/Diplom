@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+using ModelDB;
+using HomeForPets.Infrastructure;
 
-namespace ModelDB
+namespace HomeForPets.Models
 {
-    public class FormListViewModel
+    public class FormListViewModel : IFormView
     {
         public IEnumerable<Form> Forms { get; set; }
         [Display(Name = "Категория")]

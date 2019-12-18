@@ -141,6 +141,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\FormViewService.cs" />
+    <Compile Include="Infrastructure\IFormView.cs" />
     <Compile Include="Infrastructure\PetsDbContext.cs" />
     <Compile Include="Migrations\201911210929094_InitialCreate.cs" />
     <Compile Include="Migrations\201911210929094_InitialCreate.Designer.cs">
@@ -150,7 +152,14 @@
     <Compile Include="Migrations\201911240615319_FormDataAnnotation.Designer.cs">
       <DependentUpon>201911240615319_FormDataAnnotation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912181014546_Unpublic_Form.cs" />
+    <Compile Include="Migrations\201912181014546_Unpublic_Form.Designer.cs">
+      <DependentUpon>201912181014546_Unpublic_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\FormCreateViewModel.cs" />
+    <Compile Include="Models\FormListViewModel.cs" />
+    <Compile Include="Models\ImageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,11 +202,12 @@
     <Content Include="Views\Form\Create.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Home\PartialAnketa.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Form\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
     <Folder Include="Content\Images\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -218,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911240615319_FormDataAnnotation.resx">
       <DependentUpon>201911240615319_FormDataAnnotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912181014546_Unpublic_Form.resx">
+      <DependentUpon>201912181014546_Unpublic_Form.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

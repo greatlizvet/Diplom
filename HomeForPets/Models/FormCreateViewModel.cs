@@ -7,15 +7,17 @@ using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.IO;
+using ModelDB;
+using HomeForPets.Infrastructure;
 
-namespace ModelDB
+namespace HomeForPets.Models
 {
-    public class FormCreateViewModel
+    public class FormCreateViewModel : IFormView
     {
         public Form Form { get; set; }
         [Display(Name = "Категория")]
         public SelectList Categories { get; set; }
         [Display(Name = "Порода")]
-        public SelectList Specie { get; set; }
+        public SelectList Species { get; set; }
     }
 }

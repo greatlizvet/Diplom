@@ -5,12 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using ModelDB;
 using HomeForPets.Infrastructure;
+using HomeForPets.Models;
 
 namespace HomeForPets.Controllers
 {
     public class HomeController : Controller
     {
         PetsDbContext db = new PetsDbContext();
+
+        FormListViewModel formList = FormViewService.InitializeFormList();
         // GET: Home
         public ActionResult Index(int? category, int? specie)
         {
@@ -26,15 +29,7 @@ namespace HomeForPets.Controllers
                 forms = forms.Where(f => f.SpecieID == specie);
             }
 
-            List<Category> categories = db.Categories.ToList();
-            List<Specie> species = db.Species.ToList();
-
-            FormListViewModel formList = new FormListViewModel
-            {
-                Forms = forms.ToList(),
-                Categories = new SelectList(categories, "CategoryID", "CategoryName"),
-                Species = new SelectList(species, "SpecieID", "SpecieName")
-            };
+            formList.Forms = forms.ToList();
 
             return View(formList);
         }

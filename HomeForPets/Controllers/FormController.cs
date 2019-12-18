@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HomeForPets.Infrastructure;
+using HomeForPets.Models;
 using ModelDB;
 
 namespace HomeForPets.Controllers
@@ -12,10 +13,7 @@ namespace HomeForPets.Controllers
     {
         PetsDbContext db = new PetsDbContext();
 
-        public void AddDefault()
-        {
-            db.Images.Add(new Image { Path = "/Content/Images/default.jpg" });
-        }
+        FormCreateViewModel formCreate = FormViewService.InitializeFormCreate();
         
         public ActionResult Index(int? id)
         {
@@ -37,15 +35,6 @@ namespace HomeForPets.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            List<Category> categories = db.Categories.ToList();
-            List<Specie> species = db.Species.ToList();
-
-            FormCreateViewModel formCreate = new FormCreateViewModel
-            {
-                Categories = new SelectList(categories, "CategoryID", "CategoryName"),
-                Specie = new SelectList(species, "SpecieID", "SpecieName")
-            };
-
             return View(formCreate);
         }
         
@@ -55,31 +44,44 @@ namespace HomeForPets.Controllers
         {
             List<Image> images = new List<Image>();
 
-            if(ModelState.IsValid)
+            form.CreateDate = DateTime.Now;
+            //Временная заглушка
+            form.ProfileID = 1;
+
+            images = ImageService.SaveImage(files);
+
+            foreach (var img in images)
             {
-                form.CreateDate = DateTime.Now;
-                //Временная заглушка
-                form.ProfileID = 1;
-
-                images = form.SaveImage(files);
-
-                foreach(var img in images)
-                {
-                    db.Images.Add(img);
-                }
-
-                foreach (var img in images)
-                {
-                    form.Images.Add(img);
-                }
-
-                db.Forms.Add(form);
-                db.SaveChanges();
-
-                return RedirectToAction("Index", "Home");
+                db.Images.Add(img);
             }
 
-            return Create();
+            foreach (var img in images)
+            {
+                form.Images.Add(img);
+            }
+
+            db.Forms.Add(form);
+            db.SaveChanges();
+
+            return RedirectToAction("Confirm", "Form", form.FormID);
+        }
+
+        [HttpGet]
+        public ActionResult Confirm(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Form form = db.Forms.Find(id);
+
+            if(form == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(form);
         }
     }
 }
