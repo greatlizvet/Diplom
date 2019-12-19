@@ -41,10 +41,13 @@
 <div class="row">
     @foreach (var m in Model.Forms)
     {
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-            <div class="thumbnail">
-                @Html.Partial("PartialAnketa", m)
+        if (!m.UnPublished)
+        {
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                <div class="thumbnail">
+                    @Html.Partial("PartialAnketa", m)
+                </div>
             </div>
-        </div>
         }
+    }
 </div>

@@ -63,7 +63,7 @@ namespace HomeForPets.Controllers
             db.Forms.Add(form);
             db.SaveChanges();
 
-            return RedirectToAction("Confirm", "Form", form.FormID);
+            return RedirectToAction("Confirm", form.FormID);
         }
 
         [HttpGet]
@@ -81,7 +81,75 @@ namespace HomeForPets.Controllers
                 return HttpNotFound();
             }
 
-            return View(form);
+            formCreate.Form = form;
+
+            return View(formCreate);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Confirm(Form form)
+        {
+            Form newForm = db.Forms.Find(form.FormID);
+            newForm.UnPublished = false;
+
+            db.Entry(newForm).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Form form = db.Forms.Find(id);
+
+            if(form == null)
+            {
+                return HttpNotFound();
+            }
+
+            formCreate.Form = form;
+
+            return View(formCreate);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Form form)
+        {
+            //нужно что-то придумать с фотографиями, мб другой метод
+            db.Entry(form).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Profile");
+        }
+
+        public ActionResult Disable(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Form form = db.Forms.Find(id);
+
+            if (form == null)
+            {
+                return HttpNotFound();
+            }
+
+            form.Enable = false;
+
+            db.Entry(form).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Profile");
         }
     }
 }

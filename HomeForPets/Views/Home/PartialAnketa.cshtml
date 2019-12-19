@@ -12,10 +12,8 @@
     }
 }
 
-<img src="@path" />
+<a href="@Url.Action("Index", "Form", new { id = Model.FormID})"><img src="@path" /></a>
 <div class="caption">
     <h5>@Model.FormName</h5>
     <p>@Model.Species.SpecieName</p>
-    <p>@Model.Category.CategoryName</p>
-    @Html.ActionLink("Просмотреть", "Index", "Form", new { id = Model.FormID}, new { @class = "btn btn-primary" })
 </div>

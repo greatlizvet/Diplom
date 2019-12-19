@@ -204,6 +204,7 @@
     <Content Include="Views\Home\PartialAnketa.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Form\Confirm.cshtml" />
+    <Content Include="Views\Form\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
