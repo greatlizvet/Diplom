@@ -26,7 +26,7 @@ namespace ModelDB
         [Display(Name = "Возраст")]
         public string Age { get; set; }
 
-        public int ProfileID { get; set; }
+        //public int ProfileID { get; set; }
         //public virtual Profile Profile { get; set; }
 
         [Display(Name = "Категория")]
