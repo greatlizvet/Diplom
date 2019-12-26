@@ -1,0 +1,38 @@
+﻿@using HomeForPets.Models
+@model IEnumerable<HomeForPets.Models.AppUser>
+
+@{
+    ViewBag.Title = "Список аккаунтов";
+}
+
+<h2>Список аккаунтов</h2>
+
+<p>
+    @Html.ActionLink("Добавить новый", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Имя пользователя
+        </th>
+        <th>
+            Email
+        </th>
+    </tr>
+@foreach (AppUser user in Model) {
+    <tr>
+        <td>
+            @user.Id
+        </td>
+        <td>
+            @user.UserName
+        </td>
+        <td>
+            @user.Email
+        </td>
+    </tr>
+}
+</table>

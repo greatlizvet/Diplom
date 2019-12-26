@@ -16,6 +16,8 @@ namespace HomeForPets.Infrastructure
         public DbSet<Category> Categories { get; set; }
         public DbSet<Form> Forms { get; set; }
 
+        public PetsDbContext() : base("PetsDbContext") { }
+
         static PetsDbContext()
         {
             Database.SetInitializer(new PetsInitializer());
@@ -27,19 +29,29 @@ namespace HomeForPets.Infrastructure
         }
     }
 
-    public class PetsInitializer : DropCreateDatabaseIfModelChanges<PetsDbContext>
+    public class PetsInitializer : DropCreateDatabaseAlways<PetsDbContext>
     {
         protected override void Seed(PetsDbContext context)
         {
-            context.Categories.Add(new Category { CategoryName = "Собаки" });
-            context.Categories.Add(new Category { CategoryName = "Кошки" });
+            var categories = new List<Category>
+            {
+                new Category { CategoryName = "Собаки" },
+                new Category { CategoryName = "Кошки" }
+            };
 
-            context.Species.Add(new Specie { SpecieName = "Бульдог" });
-            context.Species.Add(new Specie { SpecieName = "Овчарка" });
-            context.Species.Add(new Specie { SpecieName = "Турецкая ангора" });
-            context.Species.Add(new Specie { SpecieName = "Вислоухая шотландская" });
-            context.Species.Add(new Specie { SpecieName = "Беспородная" });
+            categories.ForEach(c => context.Categories.Add(c));
+            context.SaveChanges();
 
+            var species = new List<Specie>
+            {
+                new Specie { SpecieName = "Бульдог", CategoryID = categories.Single(c => c.CategoryName == "Собаки").CategoryID},
+                new Specie { SpecieName = "Овчарка", CategoryID = categories.Single(c => c.CategoryName == "Собаки").CategoryID},
+                new Specie { SpecieName = "Турецкая ангора", CategoryID = categories.Single(c => c.CategoryName == "Кошки").CategoryID},
+                new Specie { SpecieName = "Вислоухая шотландская", CategoryID = categories.Single(c => c.CategoryName == "Кошки").CategoryID},
+                new Specie { SpecieName = "Беспородная", CategoryID = categories.Single(c => c.CategoryName == "Кошки").CategoryID}
+            };
+
+            species.ForEach(s => context.Species.Add(s));
             context.SaveChanges();
         }
     }

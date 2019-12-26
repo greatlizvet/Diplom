@@ -10,6 +10,6 @@ namespace HomeForPets.Models
     public class AppUser : IdentityUser
     {
         public int ImageID { get; set; }
-        public Image Image { get; set; }
+        public virtual Image Image { get; set; }
     }
 }

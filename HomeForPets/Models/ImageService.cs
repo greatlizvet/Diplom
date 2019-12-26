@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using ModelDB;
 
 namespace HomeForPets.Models
@@ -20,7 +21,7 @@ namespace HomeForPets.Models
                     if (file.ContentLength > 0 && IsImage(file))
                     {
                         var imageName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images"), imageName);
+                        var path = Path.Combine(HostingEnvironment.MapPath("~/Content/Images"), imageName);
                         string dbPath = "/Content/Images/" + imageName;
                         file.SaveAs(path);
 
@@ -35,6 +36,27 @@ namespace HomeForPets.Models
             }
 
             return images;
+        }
+
+        public static Image SaveAvatar(HttpPostedFileBase file)
+        {
+            Image image;
+
+            if(file != null && file.ContentLength > 0 && IsImage(file))
+            {
+                var imageName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(HostingEnvironment.MapPath("~/Content/Avatars"), imageName);
+                string dbPath = "/Content/Avatars/" + imageName;
+                file.SaveAs(path);
+
+                image = new Image { Path = dbPath };
+            }
+            else
+            {
+                image = new Image { Path = "/Content/Avatars/default.jpg" };
+            }
+
+            return image;
         }
 
         private static bool IsImage(HttpPostedFileBase img)
