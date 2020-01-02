@@ -47,6 +47,19 @@ namespace HomeForPets.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            AppUser appUser = UserManager.FindById(id);
+
+            if(appUser == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(appUser);
+        }
+
         private AppUserManager UserManager
         {
             get

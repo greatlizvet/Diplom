@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using HomeForPets.Models;
+using ModelDB;
 
 namespace HomeForPets.Infrastructure
 { 
@@ -27,9 +28,11 @@ namespace HomeForPets.Infrastructure
         private static IFormView InitilizeForm(IFormView model)
         {
             PetsDbContext db = new PetsDbContext();
+            List<Category> categories = db.Categories.ToList();
+            List<Specie> species = db.Species.ToList();
 
-            model.Categories = new SelectList(db.Categories.ToList(), "CategoryID", "CategoryName");
-            model.Species = new SelectList(db.Species.ToList(), "SpecieID", "SpecieName");
+            model.Categories = new SelectList(categories, "CategoryID", "CategoryName");
+            model.Species = new SelectList(species, "SpecieID", "SpecieName");
 
             return model;
         }

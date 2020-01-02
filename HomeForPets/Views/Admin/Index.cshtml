@@ -2,13 +2,13 @@
 @model IEnumerable<HomeForPets.Models.AppUser>
 
 @{
-    ViewBag.Title = "Список аккаунтов";
+    ViewBag.Title = "Список пользователей";
 }
 
-<h2>Список аккаунтов</h2>
+<h2>Список пользователей</h2>
 
 <p>
-    @Html.ActionLink("Добавить новый", "Create")
+    @Html.ActionLink("Добавить нового", "Create", null, new { @class = "btn btn-default"})
 </p>
 <table class="table">
     <tr>
@@ -21,6 +21,7 @@
         <th>
             Email
         </th>
+        <th></th>
     </tr>
 @foreach (AppUser user in Model) {
     <tr>
@@ -32,6 +33,10 @@
         </td>
         <td>
             @user.Email
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id = user.Id }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Удалить", "Delete", new { id = user.Id }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
