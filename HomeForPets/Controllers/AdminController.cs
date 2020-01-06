@@ -50,6 +50,11 @@ namespace HomeForPets.Controllers
         [HttpGet]
         public ActionResult Delete(string id)
         {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+
             AppUser appUser = UserManager.FindById(id);
 
             if(appUser == null)
@@ -58,6 +63,67 @@ namespace HomeForPets.Controllers
             }
 
             return View(appUser);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string Id)
+        {
+            AppUser user = UserManager.FindById(Id);
+
+            if(user == null)
+            {
+                return HttpNotFound();
+            }
+
+            IdentityResult result = UserManager.Delete(user);
+
+            if(result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Error");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            AppUser appUser = UserManager.FindById(id);
+
+            if(appUser != null)
+            {
+                return View(appUser);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(AppUser user, HttpPostedFileBase file)
+        {
+            if(ModelState.IsValid)
+            {
+                AppUser appUser = UserManager.FindById(user.Id);
+
+                appUser.UserName = user.UserName;
+                appUser.Email = user.Email;
+                appUser.PhoneNumber = user.PhoneNumber;
+                appUser.PasswordHash = UserManager.PasswordHasher.HashPassword(user.PasswordHash);
+
+                if(file != null)
+                {
+                    appUser.Image = ImageService.SaveAvatar(file);
+                }
+
+                IdentityResult result = UserManager.Update(appUser);
+
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View(user);
         }
 
         private AppUserManager UserManager
