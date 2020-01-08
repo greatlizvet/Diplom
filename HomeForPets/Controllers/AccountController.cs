@@ -16,7 +16,7 @@ namespace HomeForPets.Controllers
     public class AccountController : Controller
     {
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl = "/Home/Index")
         {
             ViewBag.returnUrl = returnUrl;
             return View();
@@ -25,7 +25,7 @@ namespace HomeForPets.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel details, string returnUrl)
+        public ActionResult Login(LoginViewModel details, string returnUrl = "/Home/Index")
         {
             if(ModelState.IsValid)
             {
@@ -54,7 +54,7 @@ namespace HomeForPets.Controllers
             return View(details);
         }
 
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult Logout()
         {
             AuthManager.SignOut();

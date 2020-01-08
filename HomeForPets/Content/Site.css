@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+.back-color div {
+    background-color: #f8f8f8;
+}
+
 .anketa-image-content img {
     width: 100%;
     margin-bottom: 10px;

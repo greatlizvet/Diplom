@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace HomeForPets.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         public ActionResult Index()
