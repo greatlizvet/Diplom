@@ -1,6 +1,61 @@
-﻿
+﻿@model HomeForPets.Models.FormListViewModel
 @{
-    ViewBag.Title = "Index";
+                /**/
+
+                ViewBag.Title = "Дом для животных";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Найдите дом животным прямо сейчас.</h1>
+        <h3>Найдите друга и помогите обрести ему дом всего за пару кликов!</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2 back-color">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Фильтр
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="thumbnail caption">
+                @using (Html.BeginForm("Home", "Index", FormMethod.Get))
+                {
+                    <div class="form-horizontal">
+                        @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("categories", Model.Categories as SelectList, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        @Html.LabelFor(model => model.Species, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("species", Model.Species as SelectList, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Фильтр
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        @foreach (var m in Model.Forms)
+        {
+            if (!m.UnPublished)
+            {
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                    <div class="thumbnail">
+                        @Html.Partial("PartialAnketa", m)
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-lg-5">
+        
+    </div>
+</div>
+<div class="row">
+    
+</div>*@

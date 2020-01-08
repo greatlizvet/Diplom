@@ -1,7 +1,22 @@
-﻿
+﻿@model ModelDB.Form
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-3 anketa-image-content">
+        @foreach(var image in Model.Images)
+        {
+            <img src="@image.Path" alt="Питомец"/>
+        }
+    </div>
+    <div class="col-lg-9">
+        <h1>@Model.FormName</h1>
+        <h3>@Model.Category.CategoryName</h3>
+        <h3>@Model.Species.SpecieName</h3>
+        <h3>@Model.Age</h3>
+        <p>@Model.Description</p>
+    </div>
+</div>
 

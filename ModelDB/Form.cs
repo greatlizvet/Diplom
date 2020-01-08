@@ -17,6 +17,7 @@ namespace ModelDB
 
         public DateTime CreateDate { get; set; }
         public bool Enable { get; set; }
+        public bool UnPublished { get; set; }
 
         [Display(Name = "Описание")]
         [Required]
@@ -45,6 +46,7 @@ namespace ModelDB
         {
             Images = new List<Image>();
             Enable = true;
+            UnPublished = true;
         }
     }
 }
