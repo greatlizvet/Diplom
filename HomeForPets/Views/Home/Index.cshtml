@@ -12,9 +12,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-2 back-color">
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Сортировка
+            Фильтр
         </button>
         <div class="collapse" id="collapseExample">
             <div class="thumbnail caption">
@@ -37,17 +37,25 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-10">
+        @foreach (var m in Model.Forms)
+        {
+            if (!m.UnPublished)
+            {
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                    <div class="thumbnail">
+                        @Html.Partial("PartialAnketa", m)
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-lg-5">
+        
+    </div>
 </div>
 <div class="row">
-    @foreach (var m in Model.Forms)
-    {
-        if (!m.UnPublished)
-        {
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                <div class="thumbnail">
-                    @Html.Partial("PartialAnketa", m)
-                </div>
-            </div>
-        }
-    }
-</div>
+    
+</div>*@
