@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace ModelDB
@@ -26,7 +23,7 @@ namespace ModelDB
         [Display(Name = "Возраст")]
         public string Age { get; set; }
 
-        public int ProfileID { get; set; }
+        //public int ProfileID { get; set; }
         //public virtual Profile Profile { get; set; }
 
         [Display(Name = "Категория")]

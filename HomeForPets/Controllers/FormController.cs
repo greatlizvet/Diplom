@@ -46,7 +46,7 @@ namespace HomeForPets.Controllers
 
             form.CreateDate = DateTime.Now;
             //Временная заглушка
-            form.ProfileID = 1;
+            //form.ProfileID = 1;
 
             images = ImageService.SaveImage(files);
 
