@@ -63,10 +63,9 @@ namespace HomeForPets.Controllers
             db.Forms.Add(form);
             db.SaveChanges();
 
-            return RedirectToAction("Confirm", form.FormID);
+            return Redirect("/Form/Confirm/" + form.FormID);
         }
-
-        [HttpGet]
+        
         public ActionResult Confirm(int? id)
         {
             if(id == null)

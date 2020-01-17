@@ -23,8 +23,11 @@ textarea {
     max-width: 280px;
 }
 
-.back-color div {
+.filter-div {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
     background-color: #f8f8f8;
+    border-color: #e7e7e7;
 }
 
 .anketa-image-content img {
@@ -32,6 +35,20 @@ textarea {
     margin-bottom: 10px;
 }
 
+.filters-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.filter {
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
 .header {
     margin-bottom: 20px;
+}
+
+.sort {
+    padding-left: 0;
 }

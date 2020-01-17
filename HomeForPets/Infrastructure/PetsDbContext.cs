@@ -50,7 +50,8 @@ namespace HomeForPets.Infrastructure
                 new Specie { SpecieName = "Овчарка", CategoryID = categories.Single(c => c.CategoryName == "Собаки").CategoryID},
                 new Specie { SpecieName = "Турецкая ангора", CategoryID = categories.Single(c => c.CategoryName == "Кошки").CategoryID},
                 new Specie { SpecieName = "Вислоухая шотландская", CategoryID = categories.Single(c => c.CategoryName == "Кошки").CategoryID},
-                new Specie { SpecieName = "Беспородная", CategoryID = categories.Single(c => c.CategoryName == "Кошки").CategoryID}
+                new Specie { SpecieName = "Беспородная", CategoryID = categories.Single(c => c.CategoryName == "Кошки").CategoryID},
+                new Specie { SpecieName = "Беспородная", CategoryID = categories.Single(c => c.CategoryName == "Собаки").CategoryID}
             };
 
             species.ForEach(s => context.Species.Add(s));
