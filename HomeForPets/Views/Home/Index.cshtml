@@ -9,13 +9,13 @@
     <div class="col-lg-2 filter-div">
         <div class="row">
             <div class="col-lg-12">
-                @using (Html.BeginForm("SortForms", "Home", FormMethod.Get))
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get, htmlAttributes: new { @id = "sortAnketaForm"}))
                 {
                     <div class="form-horizontal">
                         <div class="sort col-lg-12 filters-button">
                             <select class="form-control" id="Sort" name="Sort">
-                                <option value="@SortType.DateAsc">Дата по возрастанию</option>
-                                <option value="@SortType.DateDesc">Дата по убыванию</option>
+                                <option value="asc">Дата по возрастанию</option>
+                                <option value="desc">Дата по убыванию</option>
                             </select>
                         </div>
                     </div>

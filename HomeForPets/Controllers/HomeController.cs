@@ -20,8 +20,6 @@ namespace HomeForPets.Controllers
 
             if (model != null)
             {
-                forms = SortForms(forms, model.Sort);
-
                 if(model.CategoryID != null && model.CategoryID != 0)
                 {
                     forms = forms.Where(f => f.CategoryID == model.CategoryID);
@@ -36,9 +34,12 @@ namespace HomeForPets.Controllers
                 {
                     forms = forms.Where(f => f.FormName.Contains(model.Search));
                 }
-
-                formList.Forms = forms.ToList();
             }
+
+            forms = SortForms(forms, model.Sort);
+
+
+            formList.Forms = forms.ToList();
 
             return View(formList);
         }
@@ -56,20 +57,21 @@ namespace HomeForPets.Controllers
             return PartialView();
         }
 
-        private IQueryable<Form> SortForms(IQueryable<Form> forms, SortType sortType)
+        private IQueryable<Form> SortForms(IQueryable<Form> forms, string sortType)
         {
+            IQueryable<Form> sortedForms = forms;
+
             switch(sortType)
             {
-                case SortType.DateAsc:
-                    forms.OrderBy(f => f.CreateDate);
-                    return forms;
-                case SortType.DateDesc:
-                    forms.OrderByDescending(f => f.CreateDate);
-                    return forms;
+                case "asc":
+                    sortedForms = forms.OrderBy(f => f.CreateDate);
+                    break;
                 default:
-                    forms.OrderBy(f => f.CreateDate);
-                    return forms;
+                    sortedForms = forms.OrderByDescending(f => f.CreateDate);
+                    break;
             }
+
+            return sortedForms;
         }
     }
 }

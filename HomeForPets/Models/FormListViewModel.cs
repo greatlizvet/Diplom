@@ -34,11 +34,13 @@ namespace HomeForPets.Models
         [Display(Name = "Название анкеты")]
         public string Search { get; set; }
 
-        public SortType Sort { get; set; }
+        public string Sort { get; set; }
+
+        public PageInfo PageInfo { get; set; }
 
         public FormListViewModel()
         {
-            Sort = SortType.DateAsc;
+            Sort = "desc";
         }
     }
 }
