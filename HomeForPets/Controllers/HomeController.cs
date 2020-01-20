@@ -14,9 +14,12 @@ namespace HomeForPets.Controllers
 
         FormListViewModel formList = FormViewService.InitializeFormList();
         // GET: Home
-        public ViewResult Index(FormListViewModel model)
+        public ViewResult Index(FormListViewModel model, int page = 1)
         {
-            IQueryable<Form> forms = db.Forms;
+            IQueryable<Form> unpublicForms = db.Forms.Where(f => f.UnPublished == true);
+            IQueryable<Form> forms = db.Forms.Except(unpublicForms);
+
+            int pageSize = 3;
 
             if (model != null)
             {
@@ -38,8 +41,12 @@ namespace HomeForPets.Controllers
 
             forms = SortForms(forms, model.Sort);
 
+            IEnumerable<Form> formsPerPages = forms
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize).ToList();
 
-            formList.Forms = forms.ToList();
+            formList.PageInfo = new PageInfo { PageNumber = page, PageSize = pageSize,  TotalItems = forms.Count() };
+            formList.Forms = formsPerPages;
 
             return View(formList);
         }

@@ -150,5 +150,11 @@ namespace HomeForPets.Controllers
 
             return RedirectToAction("Index", "Profile");
         }
+
+        public string GetPhoneNumber(string profileID)
+        {
+            AppUser user = db.Users.Find(profileID);
+            return user.PhoneNumber;
+        }
     }
 }

@@ -27,8 +27,6 @@ namespace HomeForPets.Infrastructure
         {
             return new PetsDbContext();
         }
-
-        public System.Data.Entity.DbSet<HomeForPets.Models.AppRole> IdentityRoles { get; set; }
     }
 
     public class PetsInitializer : DropCreateDatabaseIfModelChanges<PetsDbContext>

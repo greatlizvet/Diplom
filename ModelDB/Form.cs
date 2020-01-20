@@ -16,11 +16,31 @@ namespace ModelDB
         public bool Enable { get; set; }
         public bool UnPublished { get; set; }
 
-        [Display(Name = "Описание")]
+        [Display(Name = "Здоровье")]
         [Required]
-        public string Description { get; set; }
+        public string Desieses { get; set; }
+
+        [Display(Name = "Характер")]
+        [Required]
+        public string Temperament { get; set; }
+
+        [Display(Name = "Трудности")]
+        [Required]
+        public string Difficulties { get; set; }
+
+        [Display(Name = "Особенности")]
+        [Required]
+        public string Specificity { get; set; }
+
+        [Display(Name = "Пол")]
+        [Required]
+        public string Sex { get; set; }
+
+        [Display(Name = "Окрас")]
+        public string Color { get; set; }
 
         [Display(Name = "Возраст")]
+        [Required]
         public string Age { get; set; }
 
         //public int ProfileID { get; set; }
@@ -31,7 +51,7 @@ namespace ModelDB
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
 
-        [Display(Name = "Вид")]
+        [Display(Name = "Порода")]
         [Required]
         public int SpecieID { get; set; }
         public virtual Specie Species { get; set; }

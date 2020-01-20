@@ -200,6 +200,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\IdentityHelper.cs" />
+    <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\AppRoleManager.cs" />
     <Compile Include="Infrastructure\AppUserManager.cs" />
     <Compile Include="Infrastructure\FormViewService.cs" />
@@ -225,6 +226,14 @@
     <Compile Include="Migrations\201912260458582_LinkSpecieCategory.cs" />
     <Compile Include="Migrations\201912260458582_LinkSpecieCategory.Designer.cs">
       <DependentUpon>201912260458582_LinkSpecieCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001201041175_ExpansionForm.cs" />
+    <Compile Include="Migrations\202001201041175_ExpansionForm.Designer.cs">
+      <DependentUpon>202001201041175_ExpansionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001201217373_ExpansionForm_SexColor.cs" />
+    <Compile Include="Migrations\202001201217373_ExpansionForm_SexColor.Designer.cs">
+      <DependentUpon>202001201217373_ExpansionForm_SexColor.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -330,6 +339,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912260458582_LinkSpecieCategory.resx">
       <DependentUpon>201912260458582_LinkSpecieCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001201041175_ExpansionForm.resx">
+      <DependentUpon>202001201041175_ExpansionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001201217373_ExpansionForm_SexColor.resx">
+      <DependentUpon>202001201217373_ExpansionForm_SexColor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
