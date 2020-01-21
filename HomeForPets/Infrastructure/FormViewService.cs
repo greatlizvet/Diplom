@@ -31,6 +31,9 @@ namespace HomeForPets.Infrastructure
             List<Category> categories = db.Categories.ToList();
             List<Specie> species = db.Species.ToList();
 
+            categories.Insert(0, new Category { CategoryName = "Все", CategoryID = 0 });
+            species.Insert(0, new Specie { SpecieName = "Все", SpecieID = 0, CategoryID = 0 });
+
             model.Categories = new SelectList(categories, "CategoryID", "CategoryName");
             model.Species = new SelectList(species, "SpecieID", "SpecieName");
 

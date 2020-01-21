@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using ModelDB;
 using HomeForPets.Infrastructure;
 using HomeForPets.Models;
+using PagedList;
 
 namespace HomeForPets.Controllers
 {
@@ -14,12 +15,13 @@ namespace HomeForPets.Controllers
 
         FormListViewModel formList = FormViewService.InitializeFormList();
         // GET: Home
-        public ViewResult Index(FormListViewModel model, int page = 1)
+        public ViewResult Index(FormListViewModel model, int? page)
         {
             IQueryable<Form> unpublicForms = db.Forms.Where(f => f.UnPublished == true);
             IQueryable<Form> forms = db.Forms.Except(unpublicForms);
 
             int pageSize = 3;
+            int pageNumber = (page ?? 1);
 
             if (model != null)
             {
@@ -39,14 +41,15 @@ namespace HomeForPets.Controllers
                 }
             }
 
+            forms = FilterSex(forms, model.Sex);
             forms = SortForms(forms, model.Sort);
 
-            IEnumerable<Form> formsPerPages = forms
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize).ToList();
-
-            formList.PageInfo = new PageInfo { PageNumber = page, PageSize = pageSize,  TotalItems = forms.Count() };
-            formList.Forms = formsPerPages;
+            formList.CurrentSort = model.Sort;
+            formList.CurrentSearch = model.Search;
+            formList.CurrentCategory = model.CategoryID;
+            formList.CurrentSpecie = model.SpecieID;
+            formList.CurrentSex = model.Sex;
+            formList.Forms = forms.ToPagedList(pageNumber, pageSize);
 
             return View(formList);
         }
@@ -76,6 +79,25 @@ namespace HomeForPets.Controllers
                 default:
                     sortedForms = forms.OrderByDescending(f => f.CreateDate);
                     break;
+            }
+
+            return sortedForms;
+        }
+
+        private IQueryable<Form> FilterSex(IQueryable<Form> forms, string sex)
+        {
+            IQueryable<Form> sortedForms = forms;
+
+            if(!String.IsNullOrEmpty(sex) && sex != "all")
+            {
+                if(sex == "man")
+                {
+                    sortedForms = sortedForms.Where(sf => sf.Sex == "man");
+                }
+                else if(sex == "woman")
+                {
+                    sortedForms = sortedForms.Where(sf => sf.Sex == "woman");
+                }
             }
 
             return sortedForms;

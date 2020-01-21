@@ -4,6 +4,7 @@
         this.specieId = '';
         this.search = '';
         this.sort = 'desc';
+        this.sex = '';
     }
 
     SortFilterFormData.prototype.init = function () {
@@ -16,7 +17,8 @@
         query = 'CategoryID=' + this.categoryId
             + '&SpecieID=' + this.specieId
             + '&Search=' + this.search
-            + '&Sort=' + this.sort;
+            + '&Sort=' + this.sort
+            + '&Sex=' + this.sex;
         return query;
     }
 
@@ -40,6 +42,9 @@
             }
             if (paramPair[0] === 'Sort') {
                 this.sort = paramPair[1];
+            }
+            if (paramPair[0] === 'Sex') {
+                this.sex = paramPair[1];
             }
         }
     }

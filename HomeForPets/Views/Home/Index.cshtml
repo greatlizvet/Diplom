@@ -1,5 +1,5 @@
 ﻿@using HomeForPets.Models
-@using HomeForPets.Helpers
+@using PagedList.Mvc
 @model HomeForPets.Models.FormListViewModel
 @{
     /**/
@@ -15,11 +15,14 @@
                     <div class="form-horizontal">
                         <div class="sort col-lg-12 filters-button">
                             <select class="form-control" id="Sort" name="Sort">
-                                <option value="desc">Сначала новые</option>
-                                <option value="asc">Сначала старые</option>
-                            </select>
-                        </div>
-                    </div>
+                                <option value="desc" @((Model.CurrentSort == "desc") ? "selected" : "")>Сначала новые</option>
+                                <option value="asc" @((Model.CurrentSort == "asc") ? "selected" : "")>Сначала старые</option>
+
+            </select>
+
+        </div>
+
+    </div>
                 }
             </div>
         </div>
@@ -50,6 +53,16 @@
                                 </div>
                                 <div class="col-lg-12">
                                     @Html.DropDownListFor(model => model.SpecieID, Model.Species as SelectList, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                <div class="col-lg-12">
+                                    @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label"})
+                                </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" id="Sex" name="Sex">
+                                        <option value="">Все</option>
+                                        <option value="man">Мужской</option>
+                                        <option value="woman">Женский</option>
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary filter">
                                     Фильтр
@@ -82,10 +95,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <div class="btn-group">
-                    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x}))
-                </div>
+            <div class="col-lg-12" id="paging">
+                Страница @(Model.Forms.PageCount < Model.Forms.PageNumber ? 0 : Model.Forms.PageNumber) из @Model.Forms.PageCount
+                @Html.PagedListPager(Model.Forms, page => Url.Action("Index",
+                    new { page,
+                        Sort = Model.CurrentSort,
+                        Search = Model.CurrentSearch,
+                        CategoryID = Model.CurrentCategory,
+                        SpecieID = Model.CurrentSpecie,
+                        Sex = Model.CurrentSex}))
             </div>
         </div>
     </div>

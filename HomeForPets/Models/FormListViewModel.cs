@@ -7,20 +7,13 @@ using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using ModelDB;
 using HomeForPets.Infrastructure;
+using PagedList;
 
 namespace HomeForPets.Models
 {
-    public enum SortType
-    {
-        [Display(Name = "Дата по возрастанию")]
-        DateAsc,
-        [Display(Name = "Дата по убыванию")]
-        DateDesc
-    }
-
     public class FormListViewModel : IFormView
     {
-        public IEnumerable<Form> Forms { get; set; }
+        public IPagedList<Form> Forms { get; set; }
 
         [Display(Name = "Категория")]
         public SelectList Categories { get; set; }
@@ -35,12 +28,14 @@ namespace HomeForPets.Models
         public string Search { get; set; }
 
         public string Sort { get; set; }
+        
+        [Display(Name = "Пол")]
+        public string Sex { get; set; }
 
-        public PageInfo PageInfo { get; set; }
-
-        public FormListViewModel()
-        {
-            Sort = "desc";
-        }
+        public int? CurrentCategory { get; set; }
+        public int? CurrentSpecie { get; set; }
+        public string CurrentSearch { get; set; }
+        public string CurrentSort { get; set; }
+        public string CurrentSex { get; set; }
     }
 }

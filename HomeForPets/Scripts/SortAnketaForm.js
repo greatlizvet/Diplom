@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     var forms = $('#forms');
+    var paginationBlock = $('#paging');
     var sortAnketaForm = $('#sortAnketaForm');
     var sortSelect = sortAnketaForm.find('#Sort');
 
@@ -18,9 +19,15 @@
             data: data,
             success: function (html) {
                 data = $(html);
+
                 ankets = data.find('#forms').children();
+                paging = data.find('#paging').children();
+
                 forms.children().remove();
+                paginationBlock.children().remove();
+
                 forms.append(ankets);
+                paginationBlock.append(paging);
             }
         });
     });
