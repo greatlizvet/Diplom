@@ -206,7 +206,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\IdentityHelper.cs" />
-    <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\AppRoleManager.cs" />
     <Compile Include="Infrastructure\AppUserManager.cs" />
     <Compile Include="Infrastructure\FormViewService.cs" />
@@ -241,15 +240,28 @@
     <Compile Include="Migrations\202001201217373_ExpansionForm_SexColor.Designer.cs">
       <DependentUpon>202001201217373_ExpansionForm_SexColor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001220915303_FormUserID.cs" />
+    <Compile Include="Migrations\202001220915303_FormUserID.Designer.cs">
+      <DependentUpon>202001220915303_FormUserID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221145440_FormAppUserId.cs" />
+    <Compile Include="Migrations\202001221145440_FormAppUserId.Designer.cs">
+      <DependentUpon>202001221145440_FormAppUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221153088_ChangeUserIdToString.cs" />
+    <Compile Include="Migrations\202001221153088_ChangeUserIdToString.Designer.cs">
+      <DependentUpon>202001221153088_ChangeUserIdToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221204336_AppUserConnectForms.cs" />
+    <Compile Include="Migrations\202001221204336_AppUserConnectForms.Designer.cs">
+      <DependentUpon>202001221204336_AppUserConnectForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AppRole.cs" />
-    <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\FormCreateViewModel.cs" />
     <Compile Include="Models\FormListViewModel.cs" />
     <Compile Include="Models\ImageService.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\RoleEditModel.cs" />
     <Compile Include="Models\RoleModificationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -267,7 +279,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\IndexUpdate.js" />
+    <Content Include="Scripts\CRUDSpecieUpdate.js" />
+    <Content Include="Scripts\HomeIndexFilterFormUpdate.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -352,6 +365,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001201217373_ExpansionForm_SexColor.resx">
       <DependentUpon>202001201217373_ExpansionForm_SexColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220915303_FormUserID.resx">
+      <DependentUpon>202001220915303_FormUserID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221145440_FormAppUserId.resx">
+      <DependentUpon>202001221145440_FormAppUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221153088_ChangeUserIdToString.resx">
+      <DependentUpon>202001221153088_ChangeUserIdToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221204336_AppUserConnectForms.resx">
+      <DependentUpon>202001221204336_AppUserConnectForms.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

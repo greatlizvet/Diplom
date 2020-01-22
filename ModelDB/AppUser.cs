@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ModelDB
 {
-    public class Image
+    public class AppUser : IdentityUser
     {
         public int ImageID { get; set; }
-        public string Path { get; set; }
+        public virtual Image Image { get; set; }
 
         public virtual ICollection<Form> Forms { get; set; }
-        public virtual ICollection<AppUser> AppUsers { get; set; }
 
-        public Image()
+        public AppUser()
         {
             Forms = new List<Form>();
-            AppUsers = new List<AppUser>();
         }
     }
 }

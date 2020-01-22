@@ -29,12 +29,21 @@ namespace HomeForPets.Infrastructure
         {
             PetsDbContext db = new PetsDbContext();
             List<Category> categories = db.Categories.ToList();
-            List<Specie> species = db.Species.ToList();
+            List<Specie> species = db.Species.Where(s => s.CategoryID == 1).ToList();
 
-            categories.Insert(0, new Category { CategoryName = "Все", CategoryID = 0 });
-            species.Insert(0, new Specie { SpecieName = "Все", SpecieID = 0, CategoryID = 0 });
+            var type = model.GetType();
+            if(type.Name == "FormListViewModel")
+            {
+                categories.Insert(0, new Category { CategoryName = "Все", CategoryID = 0 });
+                species.Insert(0, new Specie { SpecieName = "Все", SpecieID = 0, CategoryID = 0 });
 
-            model.Categories = new SelectList(categories, "CategoryID", "CategoryName");
+                model.Categories = new SelectList(categories, "CategoryID", "CategoryName", 0);
+            }
+            else
+            {
+                model.Categories = new SelectList(categories, "CategoryID", "CategoryName", 1);
+            }
+
             model.Species = new SelectList(species, "SpecieID", "SpecieName");
 
             return model;

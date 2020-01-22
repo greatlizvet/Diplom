@@ -151,10 +151,12 @@ namespace HomeForPets.Controllers
             return RedirectToAction("Index", "Profile");
         }
 
-        public string GetPhoneNumber(string profileID)
+        public JsonResult GetSpecies(int id)
         {
-            AppUser user = db.Users.Find(profileID);
-            return user.PhoneNumber;
+            List<Specie> species = db.Species.Where(s => s.CategoryID == id).ToList();
+            formCreate.Species = new SelectList(species, "SpecieID", "SpecieName");
+
+            return Json(formCreate, JsonRequestBehavior.AllowGet);
         }
     }
 }

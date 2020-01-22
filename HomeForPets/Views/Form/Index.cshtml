@@ -1,7 +1,7 @@
 ﻿@model ModelDB.Form
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Анкета: " + Model.FormName;
 }
 
 <div class="row">
@@ -21,7 +21,7 @@
             <div class="col-lg-12">
                 <p>Порода : @Model.Species.SpecieName</p>
                 <p>Возраст : @Model.Age</p>
-                <p>Пол: @Model.Sex</p>
+                <p>Пол: @((Model.Sex == "man") ? "Мужской" : "Женский")</p>
                 <p>Окрас: @Model.Color</p>
             </div>
             <div class="col-lg-12 header">

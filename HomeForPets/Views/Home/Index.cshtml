@@ -1,10 +1,12 @@
 ﻿@using HomeForPets.Models
+@using ModelDB
 @using PagedList.Mvc
 @model HomeForPets.Models.FormListViewModel
 @{
     /**/
 
     ViewBag.Title = "Дом для животных";
+    List<Specie> species = new List<Specie>();
 }
 <div class="row">
     <div class="col-lg-2 filter-div">
@@ -51,9 +53,18 @@
                                 <div class="col-lg-12">
                                     @Html.LabelFor(model => model.Species, htmlAttributes: new { @class = "control-label" })
                                 </div>
-                                <div class="col-lg-12">
-                                    @Html.DropDownListFor(model => model.SpecieID, Model.Species as SelectList, htmlAttributes: new { @class = "form-control" })
-                                </div>
+                                @if(Model.CategoryID == null)
+                                {
+                                    <div class="col-lg-12">
+                                        @Html.DropDownListFor(model => model.SpecieID, new SelectList(species, "SpecieID", "SpecieName"), htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-12">
+                                        @Html.DropDownListFor(model => model.SpecieID, Model.Categories as SelectList, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                }
                                 <div class="col-lg-12">
                                     @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label"})
                                 </div>
