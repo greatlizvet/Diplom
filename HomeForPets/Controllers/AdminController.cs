@@ -14,33 +14,59 @@ namespace HomeForPets.Controllers
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
+        PetsDbContext db = new PetsDbContext();
+
         public ActionResult Index()
         {
             return View(UserManager.Users);
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult ConfirmCreateUser(int? id)
         {
-            return View();
+            CreateUserViewModel viewModel = new CreateUserViewModel();
+
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+
+            OrderForRegistration order = db.OrderForRegistrations.Find(id);
+
+            if(order == null)
+            {
+                return HttpNotFound();
+            }
+
+            viewModel.OrderForRegistration = order;
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(CreateUserViewModel model, HttpPostedFileBase file)
+        public ActionResult ConfirmCreateUser(CreateUserViewModel model, HttpPostedFileBase file)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    Image image = ImageService.SaveAvatar(file);
+                    db.Images.Add(image);
+
+                    model.OrderForRegistration.Image = image;
+                }
+
                 AppUser user = new AppUser
                 {
-                    UserName = model.Name,
-                    Email = model.Email,
-                    PhoneNumber = model.PhoneNumber,
-                    Image = ImageService.SaveAvatar(file)
+                    UserName = model.OrderForRegistration.OrganizationName,
+                    Email = model.OrderForRegistration.Email,
+                    PhoneNumber = model.OrderForRegistration.PhoneNumber,
+                    Image = model.OrderForRegistration.Image
                 };
 
                 IdentityResult result = UserManager.Create(user, model.Password);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
                 }
@@ -52,7 +78,7 @@ namespace HomeForPets.Controllers
         [HttpGet]
         public ActionResult Delete(string id)
         {
-            if(id == null)
+            if(String.IsNullOrEmpty(id))
             {
                 return HttpNotFound();
             }
@@ -127,6 +153,8 @@ namespace HomeForPets.Controllers
 
             return View(user);
         }
+
+        
 
         private AppUserManager UserManager
         {

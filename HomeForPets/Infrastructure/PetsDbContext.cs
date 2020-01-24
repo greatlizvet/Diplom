@@ -15,6 +15,7 @@ namespace HomeForPets.Infrastructure
         public DbSet<Specie> Species { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Form> Forms { get; set; }
+        public DbSet<OrderForRegistration> OrderForRegistrations { get; set; }
 
         public PetsDbContext() : base("PetsDbContext") { }
 

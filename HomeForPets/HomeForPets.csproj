@@ -256,6 +256,10 @@
     <Compile Include="Migrations\202001221204336_AppUserConnectForms.Designer.cs">
       <DependentUpon>202001221204336_AppUserConnectForms.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001240941435_AddOrderForRegistration.cs" />
+    <Compile Include="Migrations\202001240941435_AddOrderForRegistration.Designer.cs">
+      <DependentUpon>202001240941435_AddOrderForRegistration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\FormCreateViewModel.cs" />
@@ -316,7 +320,6 @@
     <Content Include="Views\Form\Confirm.cshtml" />
     <Content Include="Views\Form\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -325,6 +328,8 @@
     <Content Include="Views\RoleAdmin\Delete.cshtml" />
     <Content Include="Views\RoleAdmin\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\OrderForRegistration.cshtml" />
+    <Content Include="Views\Admin\ConfirmCreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
@@ -377,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001221204336_AppUserConnectForms.resx">
       <DependentUpon>202001221204336_AppUserConnectForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001240941435_AddOrderForRegistration.resx">
+      <DependentUpon>202001240941435_AddOrderForRegistration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

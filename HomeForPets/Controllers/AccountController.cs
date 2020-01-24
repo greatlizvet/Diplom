@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using HomeForPets.Infrastructure;
 using HomeForPets.Models;
@@ -16,6 +13,8 @@ namespace HomeForPets.Controllers
     [Authorize(Roles = "Administrator")]
     public class AccountController : Controller
     {
+        PetsDbContext db = new PetsDbContext();
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl = "/Home/Index")
         {
@@ -61,8 +60,8 @@ namespace HomeForPets.Controllers
             AuthManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
-        [Authorize]
+        
+        [HttpGet]
         public ActionResult Index(string id)
         {
             AppUser user = UserManager.FindById(id);
@@ -73,6 +72,33 @@ namespace HomeForPets.Controllers
             }
 
             return View(user);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult OrderForRegistration()
+        {
+            OrderForRegistration viewModel = new OrderForRegistration();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult OrderForRegistration(OrderForRegistration model, HttpPostedFileBase imageAvatar)
+        {
+            Image image = ImageService.SaveAvatar(imageAvatar);
+
+            if (ModelState.IsValid)
+            {
+                db.Images.Add(image);
+
+                model.Image = image;
+                db.OrderForRegistrations.Add(model);
+
+                return Redirect("Home/Index");
+            }
+
+            return View(model);
         }
 
         private IAuthenticationManager AuthManager
