@@ -16,7 +16,7 @@
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Имя пользователя" } })
-                @Html.ValidationMessageFor(model => model.Name, "Пожалуйста, введите имя пользователя!", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -24,7 +24,7 @@
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Электронная почта" } })
-                @Html.ValidationMessageFor(model => model.Email, "Пожалуйста, введите адрес электронной почты!", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 

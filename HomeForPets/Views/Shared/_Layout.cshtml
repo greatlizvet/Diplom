@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - поиск дома животным.</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -46,12 +47,17 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/SortFilterFormData.js")
+    @Scripts.Render("~/Scripts/SpecieUpdate.js")
+    @Scripts.Render("~/Scripts/HomeIndexFilterFormUpdate.js")
+    @Scripts.Render("~/Scripts/SortAnketaForm.js")
+    @Scripts.Render("~/Scripts/CRUDSpecieUpdate.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

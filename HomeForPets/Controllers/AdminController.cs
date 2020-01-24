@@ -7,6 +7,7 @@ using HomeForPets.Infrastructure;
 using Microsoft.AspNet.Identity.Owin;
 using HomeForPets.Models;
 using Microsoft.AspNet.Identity;
+using ModelDB;
 
 namespace HomeForPets.Controllers
 {

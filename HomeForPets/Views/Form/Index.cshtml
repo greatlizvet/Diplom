@@ -1,22 +1,48 @@
 ﻿@model ModelDB.Form
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Анкета: " + Model.FormName;
 }
 
 <div class="row">
+    <div class="col-lg-12">
+        <h1>@Model.FormName</h1>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-3 anketa-image-content">
-        @foreach(var image in Model.Images)
+        @foreach(var img in Model.Images)
         {
-            <img src="@image.Path" alt="Питомец"/>
+            <img src="@img.Path" alt="Питомец"/>
         }
     </div>
-    <div class="col-lg-9">
-        <h1>@Model.FormName</h1>
-        <h3>@Model.Category.CategoryName</h3>
-        <h3>@Model.Species.SpecieName</h3>
-        <h3>@Model.Age</h3>
-        <p>@Model.Description</p>
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Порода : @Model.Species.SpecieName</p>
+                <p>Возраст : @Model.Age</p>
+                <p>Пол: @((Model.Sex == "man") ? "Мужской" : "Женский")</p>
+                <p>Окрас: @Model.Color</p>
+            </div>
+            <div class="col-lg-12 header">
+                @Html.ActionLink("Показать номер телефона", "GetPhoneNumber", "Form", htmlAttributes: new { @class = "btn btn-primary", profileID = ""})
+            </div>
+            <div class="col-lg-12">
+                @Html.ActionLink("Перейти к профилю", "Index", "Account", htmlAttributes: new { @class = "btn btn-default", id = ""})
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        @Html.LabelFor(model => model.Desieses, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Desieses</p>
+        @Html.LabelFor(model => model.Difficulties, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Difficulties</p>
+        @Html.LabelFor(model => model.Specificity, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Specificity</p>
+        @Html.LabelFor(model => model.Temperament, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Temperament</p>
     </div>
 </div>
 

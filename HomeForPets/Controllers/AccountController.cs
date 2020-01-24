@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
+using ModelDB;
 
 namespace HomeForPets.Controllers
 {

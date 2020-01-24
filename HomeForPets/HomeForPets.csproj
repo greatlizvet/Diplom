@@ -91,6 +91,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -226,9 +232,31 @@
     <Compile Include="Migrations\201912260458582_LinkSpecieCategory.Designer.cs">
       <DependentUpon>201912260458582_LinkSpecieCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001201041175_ExpansionForm.cs" />
+    <Compile Include="Migrations\202001201041175_ExpansionForm.Designer.cs">
+      <DependentUpon>202001201041175_ExpansionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001201217373_ExpansionForm_SexColor.cs" />
+    <Compile Include="Migrations\202001201217373_ExpansionForm_SexColor.Designer.cs">
+      <DependentUpon>202001201217373_ExpansionForm_SexColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001220915303_FormUserID.cs" />
+    <Compile Include="Migrations\202001220915303_FormUserID.Designer.cs">
+      <DependentUpon>202001220915303_FormUserID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221145440_FormAppUserId.cs" />
+    <Compile Include="Migrations\202001221145440_FormAppUserId.Designer.cs">
+      <DependentUpon>202001221145440_FormAppUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221153088_ChangeUserIdToString.cs" />
+    <Compile Include="Migrations\202001221153088_ChangeUserIdToString.Designer.cs">
+      <DependentUpon>202001221153088_ChangeUserIdToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221204336_AppUserConnectForms.cs" />
+    <Compile Include="Migrations\202001221204336_AppUserConnectForms.Designer.cs">
+      <DependentUpon>202001221204336_AppUserConnectForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AppRole.cs" />
-    <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\FormCreateViewModel.cs" />
     <Compile Include="Models\FormListViewModel.cs" />
@@ -243,6 +271,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -250,6 +279,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\CRUDSpecieUpdate.js" />
+    <Content Include="Scripts\HomeIndexFilterFormUpdate.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -260,6 +291,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SortAnketaForm.js" />
+    <Content Include="Scripts\SortFilterFormData.js" />
+    <Content Include="Scripts\SpecieUpdate.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -325,6 +359,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912260458582_LinkSpecieCategory.resx">
       <DependentUpon>201912260458582_LinkSpecieCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001201041175_ExpansionForm.resx">
+      <DependentUpon>202001201041175_ExpansionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001201217373_ExpansionForm_SexColor.resx">
+      <DependentUpon>202001201217373_ExpansionForm_SexColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220915303_FormUserID.resx">
+      <DependentUpon>202001220915303_FormUserID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221145440_FormAppUserId.resx">
+      <DependentUpon>202001221145440_FormAppUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221153088_ChangeUserIdToString.resx">
+      <DependentUpon>202001221153088_ChangeUserIdToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221204336_AppUserConnectForms.resx">
+      <DependentUpon>202001221204336_AppUserConnectForms.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

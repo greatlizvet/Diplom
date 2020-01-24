@@ -44,29 +44,31 @@ namespace HomeForPets.Controllers
         {
             List<Image> images = new List<Image>();
 
-            form.CreateDate = DateTime.Now;
-            //Временная заглушка
-            //form.ProfileID = 1;
-
-            images = ImageService.SaveImage(files);
-
-            foreach (var img in images)
+            if(ModelState.IsValid)
             {
-                db.Images.Add(img);
+                form.CreateDate = DateTime.Now;
+
+                images = ImageService.SaveImage(files);
+
+                foreach (var img in images)
+                {
+                    db.Images.Add(img);
+                }
+
+                foreach (var img in images)
+                {
+                    form.Images.Add(img);
+                }
+
+                db.Forms.Add(form);
+                db.SaveChanges();
+
+                return Redirect("/Form/Confirm/" + form.FormID);
             }
 
-            foreach (var img in images)
-            {
-                form.Images.Add(img);
-            }
-
-            db.Forms.Add(form);
-            db.SaveChanges();
-
-            return RedirectToAction("Confirm", form.FormID);
+            return View(formCreate);
         }
-
-        [HttpGet]
+        
         public ActionResult Confirm(int? id)
         {
             if(id == null)
@@ -90,13 +92,18 @@ namespace HomeForPets.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Confirm(Form form)
         {
-            Form newForm = db.Forms.Find(form.FormID);
-            newForm.UnPublished = false;
+            if(ModelState.IsValid)
+            {
+                Form newForm = db.Forms.Find(form.FormID);
+                newForm.UnPublished = false;
 
-            db.Entry(newForm).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+                db.Entry(newForm).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(formCreate);
         }
 
         [HttpGet]
@@ -123,11 +130,18 @@ namespace HomeForPets.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Form form)
         {
-            //нужно что-то придумать с фотографиями, мб другой метод
-            db.Entry(form).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            if(ModelState.IsValid)
+            {
+                //нужно что-то придумать с фотографиями, мб другой метод
+                db.Entry(form).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
 
-            return RedirectToAction("Index", "Profile");
+                return RedirectToAction("Index", "Profile");
+            }
+
+            formCreate.Form = form;
+
+            return View(formCreate);
         }
 
         public ActionResult Disable(int? id)
@@ -150,6 +164,14 @@ namespace HomeForPets.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Profile");
+        }
+
+        public JsonResult GetSpecies(int id)
+        {
+            List<Specie> species = db.Species.Where(s => s.CategoryID == id).ToList();
+            formCreate.Species = new SelectList(species, "SpecieID", "SpecieName");
+
+            return Json(formCreate, JsonRequestBehavior.AllowGet);
         }
     }
 }
