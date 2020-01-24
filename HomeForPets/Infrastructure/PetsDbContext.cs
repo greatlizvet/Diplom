@@ -29,7 +29,7 @@ namespace HomeForPets.Infrastructure
         }
     }
 
-    public class PetsInitializer : DropCreateDatabaseIfModelChanges<PetsDbContext>
+    public class PetsInitializer : DropCreateDatabaseAlways<PetsDbContext>
     {
         protected override void Seed(PetsDbContext context)
         {
