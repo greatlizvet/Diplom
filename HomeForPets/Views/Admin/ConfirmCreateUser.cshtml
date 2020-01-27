@@ -50,7 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrderForRegistration.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.OrderForRegistration.City, htmlAttributes: new { @class = "form-control", placeholder = "Пароль"})
+                @Html.EditorFor(model => model.OrderForRegistration.City, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OrderForRegistration.City, "", new { @class = "text-danger" })
             </div>
         </div>

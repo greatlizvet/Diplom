@@ -68,7 +68,17 @@ namespace HomeForPets.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    db.SaveChanges();
+
+                    string adminId = User.Identity.GetUserId();
+                    AppUser admin = UserManager.FindById(adminId);
+                    string[] messageBody = new string[2];
+                    messageBody[0] = user.UserName;
+                    messageBody[1] = model.Password;
+
+                    MailSender.Send(admin.Email, admin.UserName, user.Email, messageBody, MailType.Accept);
+
+                    return RedirectToAction("Index", "Order");
                 }
             }
 

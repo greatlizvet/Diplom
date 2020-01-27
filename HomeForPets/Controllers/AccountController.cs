@@ -94,8 +94,9 @@ namespace HomeForPets.Controllers
 
                 model.Image = image;
                 db.OrderForRegistrations.Add(model);
+                db.SaveChanges();
 
-                return Redirect("Home/Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(model);

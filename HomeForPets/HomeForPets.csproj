@@ -201,6 +201,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,6 +212,7 @@
     <Compile Include="Infrastructure\FormViewService.cs" />
     <Compile Include="Infrastructure\IdentityConfig.cs" />
     <Compile Include="Infrastructure\IFormView.cs" />
+    <Compile Include="Infrastructure\MailSender.cs" />
     <Compile Include="Infrastructure\PetsDbContext.cs" />
     <Compile Include="Migrations\201911210929094_InitialCreate.cs" />
     <Compile Include="Migrations\201911210929094_InitialCreate.Designer.cs">
@@ -260,6 +262,14 @@
     <Compile Include="Migrations\202001240941435_AddOrderForRegistration.Designer.cs">
       <DependentUpon>202001240941435_AddOrderForRegistration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001270610046_NewFieldsForOrders.cs" />
+    <Compile Include="Migrations\202001270610046_NewFieldsForOrders.Designer.cs">
+      <DependentUpon>202001270610046_NewFieldsForOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001271115069_NullableUserImage.cs" />
+    <Compile Include="Migrations\202001271115069_NullableUserImage.Designer.cs">
+      <DependentUpon>202001271115069_NullableUserImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\FormCreateViewModel.cs" />
@@ -284,6 +294,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\CRUDSpecieUpdate.js" />
+    <Content Include="Scripts\DenyOrderForm.js" />
     <Content Include="Scripts\HomeIndexFilterFormUpdate.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -330,6 +341,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\OrderForRegistration.cshtml" />
     <Content Include="Views\Admin\ConfirmCreateUser.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
@@ -385,6 +397,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001240941435_AddOrderForRegistration.resx">
       <DependentUpon>202001240941435_AddOrderForRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001270610046_NewFieldsForOrders.resx">
+      <DependentUpon>202001270610046_NewFieldsForOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001271115069_NullableUserImage.resx">
+      <DependentUpon>202001271115069_NullableUserImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

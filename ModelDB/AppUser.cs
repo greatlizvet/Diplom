@@ -9,7 +9,7 @@ namespace ModelDB
 {
     public class AppUser : IdentityUser
     {
-        public int ImageID { get; set; }
+        public int? ImageID { get; set; }
         public virtual Image Image { get; set; }
 
         public virtual ICollection<Form> Forms { get; set; }

@@ -27,5 +27,15 @@ namespace ModelDB
         public int ImageID { get; set; }
         [Display(Name = "Изображение пользователя")]
         public virtual Image Image { get; set; }
+
+        [Display(Name = "Коммнтарий к заявке")]
+        public string Comment { get; set; }
+
+        public bool Denied { get; set; }
+        
+        public OrderForRegistration()
+        {
+            Denied = false;
+        }
     }
 }
