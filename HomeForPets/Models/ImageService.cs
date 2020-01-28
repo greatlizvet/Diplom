@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Hosting;
+using ModelDB;
+
+namespace HomeForPets.Models
+{
+    public static class ImageService
+    {
+        public static List<Image> SaveImage(HttpPostedFileBase[] files)
+        {
+            List<Image> images = new List<Image>();
+
+            foreach (var file in files)
+            {
+                if (file != null)
+                {
+                    if (file.ContentLength > 0 && IsImage(file))
+                    {
+                        var imageName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(HostingEnvironment.MapPath("~/Content/Images"), imageName);
+                        string dbPath = "/Content/Images/" + imageName;
+                        file.SaveAs(path);
+
+                        Image savedImage = new Image { Path = dbPath };
+                        images.Add(savedImage);
+                    }
+                }
+                else
+                {
+                    images.Add(new Image { Path = "/Content/Images/default.jpg" });
+                }
+            }
+
+            return images;
+        }
+
+        public static Image SaveAvatar(HttpPostedFileBase file)
+        {
+            Image image;
+
+            if(file != null && file.ContentLength > 0 && IsImage(file))
+            {
+                var imageName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(HostingEnvironment.MapPath("~/Content/Avatars"), imageName);
+                string dbPath = "/Content/Avatars/" + imageName;
+                file.SaveAs(path);
+
+                image = new Image { Path = dbPath };
+            }
+            else
+            {
+                image = new Image { Path = "/Content/Avatars/default.jpg" };
+            }
+
+            return image;
+        }
+
+        private static bool IsImage(HttpPostedFileBase img)
+        {
+            switch (img.ContentType)
+            {
+                case "image/jpeg":
+                    return true;
+                case "image/png":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    }
+}

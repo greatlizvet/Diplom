@@ -1,0 +1,30 @@
+﻿@model ModelDB.AppUser
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Smth = "";
+}
+
+<h2>Index</h2>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 anketa-image-content">
+            <img src="@Model.Image.Path" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@Model.UserName</h3>
+            <h3>Контакты</h3>
+            <address>
+                Город : <br />
+                Номер телефона : @Model.PhoneNumber <br />
+                Электронная почта : @Model.Email <br />
+            </address>
+            <h3>Анкеты</h3>
+        </div>
+    </div>
+    <!--Место под анкеты-->
+</div>

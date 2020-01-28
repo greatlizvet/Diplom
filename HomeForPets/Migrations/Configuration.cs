@@ -4,6 +4,7 @@ namespace HomeForPets.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Npgsql;
 
     internal sealed class Configuration : DbMigrationsConfiguration<HomeForPets.Infrastructure.PetsDbContext>
     {

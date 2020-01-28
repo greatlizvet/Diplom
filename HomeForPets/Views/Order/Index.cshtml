@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ModelDB.OrderForRegistration>
+
+@{
+    ViewBag.Title = "Поступившие заявки на регистрацию";
+}
+
+<h2>Список поступивших заявок на регистрацию.</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Denied == false)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrganizationName)
+                </td>
+                <td>
+                    @Html.ActionLink("Одобрить", "ConfirmCreateUser", "Admin", new { id = item.OrderForRegistrationID }, new { @class = "btn btn-primary"}) |
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#denyModal" data-anketa-id="@item.OrderForRegistrationID">
+                        Отклонить
+                    </button>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<div class="modal fade" id="denyModal" tabindex="-1" role="dialog" aria-labelledby="denyModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="denyModalLabel">Отказ в регистрации</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/Order/Denied" method="post">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <h3>Вы уверены, что хотите отклонить заявку?</h3>
+                    <input type="hidden" value="" id="modalForm_id" name="id" />
+                    <label>Комментарий</label>
+                    <textarea class="form-control" id="modalForm_comment" name="comment"></textarea>
+                    @Html.ValidationMessage("comment", new { @class = "text-danger" })
+                    <br />
+                    <input type="submit" class="btn btn-primary" value="Подтвердить" /> |
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

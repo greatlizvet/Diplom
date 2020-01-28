@@ -1,0 +1,26 @@
+﻿@model HomeForPets.Models.LoginViewModel
+@{
+    ViewBag.Title = "Авторизация";
+}
+
+<h2>Войти</h2>
+@Html.ValidationSummary()
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName)
+        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control"})
+        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control"})
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"})
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Войти" class="btn btn-primary"/>
+    </div>
+}

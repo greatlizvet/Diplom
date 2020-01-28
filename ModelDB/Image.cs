@@ -12,10 +12,12 @@ namespace ModelDB
         public string Path { get; set; }
 
         public virtual ICollection<Form> Forms { get; set; }
+        public virtual ICollection<AppUser> AppUsers { get; set; }
 
         public Image()
         {
             Forms = new List<Form>();
+            AppUsers = new List<AppUser>();
         }
     }
 }
