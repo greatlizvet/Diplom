@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HomeForPets.Infrastructure;
@@ -58,7 +56,8 @@ namespace HomeForPets.Controllers
 
                 AppUser user = new AppUser
                 {
-                    UserName = model.OrderForRegistration.OrganizationName,
+                    TitleName = model.OrderForRegistration.OrganizationName,
+                    UserName = model.OrderForRegistration.Email,
                     Email = model.OrderForRegistration.Email,
                     PhoneNumber = model.OrderForRegistration.PhoneNumber,
                     Image = model.OrderForRegistration.Image

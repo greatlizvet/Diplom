@@ -12,6 +12,8 @@ namespace ModelDB
         public int? ImageID { get; set; }
         public virtual Image Image { get; set; }
 
+        public string TitleName { get; set; }
+
         public virtual ICollection<Form> Forms { get; set; }
 
         public AppUser()

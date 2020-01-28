@@ -62,6 +62,7 @@ namespace HomeForPets.Controllers
         }
         
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index(string id)
         {
             AppUser user = UserManager.FindById(id);
