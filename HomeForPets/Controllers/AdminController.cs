@@ -87,19 +87,14 @@ namespace HomeForPets.Controllers
         [HttpGet]
         public ActionResult Delete(string id)
         {
-            if(String.IsNullOrEmpty(id))
-            {
-                return HttpNotFound();
-            }
-
             AppUser appUser = UserManager.FindById(id);
 
-            if(appUser == null)
+            if(appUser != null)
             {
-                return HttpNotFound();
+                return View(appUser);
             }
 
-            return View(appUser);
+            return RedirectToAction("Index");
         }
 
         [HttpPost, ActionName("Delete")]

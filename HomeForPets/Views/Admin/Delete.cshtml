@@ -11,7 +11,10 @@
     <hr />
     <div class="row">
         <div class="col-md-3">
-            <img src="@Model.Image.Path" />
+            @if (Model.Image != null)
+            {
+                <img src="@Model.Image.Path" />
+            }
         </div>
     </div>
     <div class="row">

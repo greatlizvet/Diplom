@@ -1,4 +1,5 @@
-﻿@model HomeForPets.Models.FormCreateViewModel
+﻿@using Microsoft.AspNet.Identity
+@model HomeForPets.Models.FormCreateViewModel
 
 @{
     ViewBag.Title = "Создание анкеты";
@@ -12,6 +13,7 @@
 
     <div class="form-horizontal">
         <hr />
+        <input type="hidden" value="@User.Identity.GetUserId()" id ="Form_AppUserId" name="Form.AppUserId"/>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Form.FormName, htmlAttributes: new { @class = "control-label col-md-2" })

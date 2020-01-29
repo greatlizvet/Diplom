@@ -9,10 +9,10 @@ namespace HomeForPets.Infrastructure
 { 
     public static class FormViewService
     {
-        public static FormCreateViewModel InitializeFormCreate()
+        public static FormCreateViewModel InitializeFormCreate(int categoryId = 1, int specieId = 1)
         {
             FormCreateViewModel formCreate = new FormCreateViewModel();
-            formCreate = (FormCreateViewModel)InitilizeForm(formCreate);
+            formCreate = (FormCreateViewModel)InitilizeForm(formCreate, categoryId, specieId);
 
             return formCreate;
         }
@@ -45,6 +45,18 @@ namespace HomeForPets.Infrastructure
             }
 
             model.Species = new SelectList(species, "SpecieID", "SpecieName");
+
+            return model;
+        }
+
+        private static IFormView InitilizeForm(IFormView model, int categoryId, int specieId)
+        {
+            PetsDbContext db = new PetsDbContext();
+            List<Category> categories = db.Categories.ToList();
+            List<Specie> species = db.Species.Where(s => s.CategoryID == categoryId).ToList();
+
+            model.Categories = new SelectList(categories, "CategoryID", "CategoryName", categoryId);
+            model.Species = new SelectList(species, "SpecieID", "SpecieName", specieId);
 
             return model;
         }

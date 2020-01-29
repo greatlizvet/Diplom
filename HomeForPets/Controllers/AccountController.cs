@@ -76,6 +76,12 @@ namespace HomeForPets.Controllers
         }
 
         [HttpGet]
+        public ActionResult UsersForms()
+        {
+            return PartialView();
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult OrderForRegistration()
         {

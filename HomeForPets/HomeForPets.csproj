@@ -280,6 +280,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
+    <Compile Include="Models\Error.cs" />
     <Compile Include="Models\FormCreateViewModel.cs" />
     <Compile Include="Models\FormListViewModel.cs" />
     <Compile Include="Models\ImageService.cs" />
@@ -303,6 +304,7 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\CRUDSpecieUpdate.js" />
     <Content Include="Scripts\DenyOrderForm.js" />
+    <Content Include="Scripts\GetPhoneNumberButton.js" />
     <Content Include="Scripts\HomeIndexFilterFormUpdate.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -350,6 +352,8 @@
     <Content Include="Views\Admin\ConfirmCreateUser.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Account\UsersForms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />

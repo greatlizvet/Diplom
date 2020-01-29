@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using HomeForPets.Infrastructure;
 using HomeForPets.Models;
 using ModelDB;
+using Microsoft.AspNet.Identity;
 
 namespace HomeForPets.Controllers
 {
@@ -15,6 +16,7 @@ namespace HomeForPets.Controllers
 
         FormCreateViewModel formCreate = FormViewService.InitializeFormCreate();
         
+
         public ActionResult Index(int? id)
         {
             if(id == null)
@@ -46,9 +48,8 @@ namespace HomeForPets.Controllers
 
             if(ModelState.IsValid)
             {
-                form.CreateDate = DateTime.Now;
-
                 images = ImageService.SaveImage(files);
+                form.AppUserId = User.Identity.GetUserId();
 
                 foreach (var img in images)
                 {
@@ -83,6 +84,7 @@ namespace HomeForPets.Controllers
                 return HttpNotFound();
             }
 
+            formCreate = FormViewService.InitializeFormCreate(form.CategoryID, form.SpecieID);
             formCreate.Form = form;
 
             return View(formCreate);
@@ -90,18 +92,40 @@ namespace HomeForPets.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm(Form form)
+        public ActionResult Confirm(Form form, HttpPostedFileBase[] files)
         {
+            List<Image> images = new List<Image>();
+
             if(ModelState.IsValid)
             {
                 Form newForm = db.Forms.Find(form.FormID);
+                images = newForm.Images.ToList();
+
+                newForm.FormName = form.FormName;
+                newForm.Age = form.Age;
+                newForm.CategoryID = form.CategoryID;
+                newForm.Color = form.Color;
+                newForm.Desieses = form.Desieses;
+                newForm.Difficulties = form.Difficulties;
+                newForm.Sex = form.Sex;
+                newForm.SpecieID = form.SpecieID;
+                newForm.Specificity = form.Specificity;
+                newForm.Temperament = form.Temperament;
                 newForm.UnPublished = false;
+                newForm.CreateDate = DateTime.Now;
+
+                images = SetImages(files);
+
+                newForm.Images = images;
 
                 db.Entry(newForm).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
             }
+
+            formCreate = FormViewService.InitializeFormCreate(form.CategoryID, form.SpecieID);
+            formCreate.Form = form;
 
             return View(formCreate);
         }
@@ -128,11 +152,14 @@ namespace HomeForPets.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Form form)
+        public ActionResult Edit(Form form, HttpPostedFileBase[] files)
         {
+            List<Image> images = new List<Image>();
+
             if(ModelState.IsValid)
             {
-                //нужно что-то придумать с фотографиями, мб другой метод
+                images = SetImages(files);
+
                 db.Entry(form).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
@@ -163,7 +190,7 @@ namespace HomeForPets.Controllers
             db.Entry(form).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Profile");
+            return RedirectToAction("Index", "Account");
         }
 
         public JsonResult GetSpecies(int id)
@@ -172,6 +199,25 @@ namespace HomeForPets.Controllers
             formCreate.Species = new SelectList(species, "SpecieID", "SpecieName");
 
             return Json(formCreate, JsonRequestBehavior.AllowGet);
+        }
+
+        private List<Image> SetImages(HttpPostedFileBase[] files)
+        {
+            List<Image> images = new List<Image>();
+
+            HttpPostedFileBase img = files.FirstOrDefault();
+
+            if (img != null)
+            {
+                images = ImageService.SaveImage(files);
+
+                foreach (var image in images)
+                {
+                    db.Images.Add(image);
+                }
+            }
+
+            return images;
         }
     }
 }

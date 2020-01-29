@@ -1,0 +1,30 @@
+﻿@using ModelDB
+@using Microsoft.AspNet.Identity
+
+@model ModelDB.Form
+
+@{ 
+    string path = "...";
+    Image image;
+
+    if (Model.Images.Count > 0)
+    {
+        image = Model.Images.FirstOrDefault();
+        path = image.Path;
+    }
+}
+
+<a href="@Url.Action("Index", "Form", new { id = Model.FormID})"><img src="@path"/></a>
+
+<div class="caption">
+    <h5>@Model.FormName</h5>
+    <p>@Model.Species.SpecieName</p>
+    @if (Model.AppUserId == User.Identity.GetUserId())
+    {
+        @Html.ActionLink("Закрыть", "Disable", "Form", new { id = Model.FormID }, new { @class = "btn btn-danger users-form-button" })
+        if (Model.UnPublished)
+        {
+            @Html.ActionLink("Опубликовать", "Confirm", "Form", new { id = Model.FormID }, new { @class = "btn btn-primary" })
+        }
+    }
+</div>

@@ -1,0 +1,15 @@
+﻿@model HomeForPets.Models.Error
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ошибка!</h2>
+
+<h3>
+    @Model.Message
+    @Model.InnerExceptionMessage
+</h3>
+
+<p>Трассировка стека:</p>
+
+<h3>@Model.StackTrace</h3>

@@ -1,17 +1,19 @@
 ﻿@model ModelDB.AppUser
 
 @{
-    ViewBag.Title = "Index";
-    ViewBag.Smth = "";
+    ViewBag.Title = Model.UserName;
 }
 
-<h2>Index</h2>
+<h2>Пользователь: @Model.UserName</h2>
 
 <div>
     <hr />
     <div class="row">
         <div class="col-md-3 anketa-image-content">
-            <img src="@Model.Image.Path" />
+            @if (Model.Image != null)
+            {
+                <img src="@Model.Image.Path" />
+            }
         </div>
     </div>
     <div class="row">
@@ -26,5 +28,15 @@
             <h3>Анкеты</h3>
         </div>
     </div>
-    <!--Место под анкеты-->
+    @if (Model.Forms != null)
+    {
+        foreach (var form in Model.Forms)
+        {
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                <div class="thumbnail">
+                    @Html.Partial("UsersForms", form)
+                </div>
+            </div>
+        }
+    }
 </div>
