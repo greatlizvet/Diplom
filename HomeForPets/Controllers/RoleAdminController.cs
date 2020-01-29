@@ -11,6 +11,7 @@ using ModelDB;
 
 namespace HomeForPets.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class RoleAdminController : Controller
     {
         public ActionResult Index()
