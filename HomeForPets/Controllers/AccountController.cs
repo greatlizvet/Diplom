@@ -25,7 +25,7 @@ namespace HomeForPets.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel details, string returnUrl = "/Home/Index")
+        public ActionResult Login(LoginViewModel details, string returnUrl)
         {
             if(ModelState.IsValid)
             {
@@ -44,6 +44,11 @@ namespace HomeForPets.Controllers
                     {
                         IsPersistent = false
                     }, identity);
+
+                    if (string.IsNullOrEmpty(returnUrl))
+                    {
+                        returnUrl = "/Home/Index";
+                    }
 
                     return Redirect(returnUrl);
                 }

@@ -14,6 +14,7 @@ namespace HomeForPets.Infrastructure
         public DbSet<Category> Categories { get; set; }
         public DbSet<Form> Forms { get; set; }
         public DbSet<OrderForRegistration> OrderForRegistrations { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public PetsDbContext() : base("PetsDbContext") { }
 
@@ -32,7 +33,6 @@ namespace HomeForPets.Infrastructure
     {
         protected override void Seed(PetsDbContext context)
         {
-            PerformInitialSetup(context);
             var categories = new List<Category>
             {
                 new Category { CategoryName = "Собаки" },
@@ -53,6 +53,21 @@ namespace HomeForPets.Infrastructure
             };
 
             species.ForEach(s => context.Species.Add(s));
+            context.SaveChanges();
+
+            var cities = new List<City>
+            {
+                new City {Name = "Кемерово"},
+                new City {Name = "Москва"},
+                new City {Name = "Санкт-Петербург"},
+                new City {Name = "Новосибирск"},
+                new City {Name = "Красноярск"}
+            };
+
+            cities.ForEach(c => context.Cities.Add(c));
+            context.SaveChanges();
+
+            PerformInitialSetup(context);
             context.SaveChanges();
 
             base.Seed(context);
@@ -76,7 +91,7 @@ namespace HomeForPets.Infrastructure
             AppUser user = userManager.FindByName(userName);
             if(user == null)
             {
-                userManager.Create(new AppUser { UserName = userName, Email = email }, password);
+                userManager.Create(new AppUser { UserName = userName, Email = email, CityID = 1 }, password);
                 user = userManager.FindByName(userName);
             }
 

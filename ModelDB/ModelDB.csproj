@@ -60,6 +60,7 @@
     <Compile Include="AppRole.cs" />
     <Compile Include="AppUser.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="City.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="OrderForRegistration.cs" />

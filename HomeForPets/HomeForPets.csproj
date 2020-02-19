@@ -278,6 +278,10 @@
     <Compile Include="Migrations\202001280509341_UserTitleName.Designer.cs">
       <DependentUpon>202001280509341_UserTitleName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002171135281_City.cs" />
+    <Compile Include="Migrations\202002171135281_City.Designer.cs">
+      <DependentUpon>202002171135281_City.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\Error.cs" />
@@ -421,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001280509341_UserTitleName.resx">
       <DependentUpon>202001280509341_UserTitleName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002171135281_City.resx">
+      <DependentUpon>202002171135281_City.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
