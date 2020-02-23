@@ -22,7 +22,8 @@ namespace ModelDB
 
         [Display(Name = "Город")]
         [Required]
-        public string City { get; set; }
+        public int? CityID { get; set; }
+        public virtual City City { get; set; }
 
         public int ImageID { get; set; }
         [Display(Name = "Изображение пользователя")]

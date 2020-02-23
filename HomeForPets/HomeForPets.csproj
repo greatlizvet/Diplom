@@ -282,6 +282,10 @@
     <Compile Include="Migrations\202002171135281_City.Designer.cs">
       <DependentUpon>202002171135281_City.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002221227040_OrderForReg_ChangeCityDataType.cs" />
+    <Compile Include="Migrations\202002221227040_OrderForReg_ChangeCityDataType.Designer.cs">
+      <DependentUpon>202002221227040_OrderForReg_ChangeCityDataType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\Error.cs" />
@@ -289,6 +293,7 @@
     <Compile Include="Models\FormListViewModel.cs" />
     <Compile Include="Models\ImageService.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\OrderForRegistrationViewModel.cs" />
     <Compile Include="Models\RoleEditModel.cs" />
     <Compile Include="Models\RoleModificationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -428,6 +433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002171135281_City.resx">
       <DependentUpon>202002171135281_City.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002221227040_OrderForReg_ChangeCityDataType.resx">
+      <DependentUpon>202002221227040_OrderForReg_ChangeCityDataType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

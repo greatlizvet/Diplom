@@ -114,9 +114,15 @@ namespace HomeForPets.Controllers
                 newForm.UnPublished = false;
                 newForm.CreateDate = DateTime.Now;
 
-                images = SetImages(files);
-
-                newForm.Images = images;
+                if(files.First() != null)
+                {
+                    images = SetImages(files);
+                    newForm.Images = images;
+                }
+                else
+                {
+                    newForm.Images = form.Images;
+                }
 
                 db.Entry(newForm).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -158,7 +164,10 @@ namespace HomeForPets.Controllers
 
             if(ModelState.IsValid)
             {
-                images = SetImages(files);
+                if(files.First() != null)
+                {
+                    images = SetImages(files);
+                }
 
                 db.Entry(form).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -204,17 +213,11 @@ namespace HomeForPets.Controllers
         private List<Image> SetImages(HttpPostedFileBase[] files)
         {
             List<Image> images = new List<Image>();
+            images = ImageService.SaveImage(files);
 
-            HttpPostedFileBase img = files.FirstOrDefault();
-
-            if (img != null)
+            foreach (var image in images)
             {
-                images = ImageService.SaveImage(files);
-
-                foreach (var image in images)
-                {
-                    db.Images.Add(image);
-                }
+                db.Images.Add(image);
             }
 
             return images;

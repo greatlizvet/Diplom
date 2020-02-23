@@ -19,5 +19,7 @@ namespace HomeForPets.Models
         public SelectList Categories { get; set; }
         [Display(Name = "Порода")]
         public SelectList Species { get; set; }
+        [Display(Name = "Город")]
+        public SelectList Cities { get; set; }
     }
 }

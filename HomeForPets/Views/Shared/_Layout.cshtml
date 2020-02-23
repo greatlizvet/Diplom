@@ -12,7 +12,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar header-green text-coloring navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,15 +20,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Дом, милый дом", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand brand-logo" href="/Home/Index/">
+                    <img alt="Brand" src="~/Content/Avatars/brand.png"/>
+                </a>
+                @Html.ActionLink("Дом для животных", "Index", "Home", new { area = "" }, new { @class = "navbar-brand brand-text" })
             </div>
             <div class="navbar-collapse collapse">
                 @if (Request.IsAuthenticated)
                 {
-                    <ul class="nav navbar-nav">
+                    <ul class="nav link navbar-nav">
                         <li>@Html.ActionLink("Добавить анкету", "Create", "Form")</li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav link navbar-nav navbar-right">
+                        @if(User.IsInRole("Administrator"))
+                        {
+                            <li><a href="/Order/Index/"><span class="glyphicon glyphicon-bell"></span></a></li>
+                        }
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -40,7 +47,7 @@
                 }
                 else
                 {
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav link navbar-nav navbar-right">
                         <li>@Html.ActionLink("Войти", "Login", "Account")</li>
                         <li>@Html.ActionLink("Регистрация", "OrderForRegistration", "Account")</li>
                     </ul>
@@ -48,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="body-content">
+    <div class="body-content container">
         @RenderBody()
     </div>
 

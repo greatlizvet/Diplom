@@ -24,7 +24,7 @@
         @Html.ActionLink("Закрыть", "Disable", "Form", new { id = Model.FormID }, new { @class = "btn btn-danger users-form-button" })
         if (Model.UnPublished)
         {
-            @Html.ActionLink("Опубликовать", "Confirm", "Form", new { id = Model.FormID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Опубликовать", "Confirm", "Form", new { id = Model.FormID }, new { @class = "btn btn-outline" })
         }
     }
 </div>

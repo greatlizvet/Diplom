@@ -3,10 +3,8 @@ using ModelDB;
 
 namespace HomeForPets.Models
 {
-    public class CreateUserViewModel
+    public class CreateUserViewModel : OrderForRegistrationViewModel
     {
-        public OrderForRegistration OrderForRegistration { get; set; }
-
         [Required]
         [Display(Name = "Пароль")]
         [DataType(DataType.Password)]

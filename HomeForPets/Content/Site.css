@@ -42,7 +42,6 @@ textarea {
 
 .filter {
     margin-top: 5px;
-    margin-left: 15px;
 }
 
 .header {
@@ -50,9 +49,50 @@ textarea {
 }
 
 .sort {
-    padding-left: 0;
+    padding-left: 15px;
 }
 
 .users-form-button {
     margin-right: 5px;
+}
+
+.brand-logo img {
+    width: 20px;
+    height: 20px;
+}
+
+.brand-text {
+    font-size: 20pt;
+    color: white;
+}
+
+.text-coloring a {
+    color: white;
+}
+
+.header-green {
+    background-color: #2ba152;
+    border-color: #1cb850;
+}
+
+.link > li > a:hover,
+.link > li > a:focus,
+.link > li > a:active {
+    text-decoration: none;
+    background-color: #27914b;
+}
+
+.btn-outline {
+    border-color: #2ba152;
+    color: #2ba152;
+    background-color: white;
+}
+
+.btn-outline:hover, .btn-green {
+    background-color: #2ba152;
+    color: white;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #27914b;
 }

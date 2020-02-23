@@ -6,6 +6,8 @@ using Microsoft.AspNet.Identity.Owin;
 using HomeForPets.Models;
 using Microsoft.AspNet.Identity;
 using ModelDB;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HomeForPets.Controllers
 {
@@ -13,6 +15,13 @@ namespace HomeForPets.Controllers
     public class AdminController : Controller
     {
         PetsDbContext db = new PetsDbContext();
+        CreateUserViewModel viewModel = new CreateUserViewModel();
+
+        public AdminController()
+        {
+            List<City> cities = db.Cities.ToList();
+            viewModel.Cities = new SelectList(cities, "CityID", "Name");
+        }
 
         public ActionResult Index()
         {
@@ -22,9 +31,7 @@ namespace HomeForPets.Controllers
         [HttpGet]
         public ActionResult ConfirmCreateUser(int? id)
         {
-            CreateUserViewModel viewModel = new CreateUserViewModel();
-
-            if(id == null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -157,9 +164,7 @@ namespace HomeForPets.Controllers
 
             return View(user);
         }
-
         
-
         private AppUserManager UserManager
         {
             get

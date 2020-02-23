@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
 using ModelDB;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace HomeForPets.Controllers
 {
@@ -14,7 +16,8 @@ namespace HomeForPets.Controllers
     public class AccountController : Controller
     {
         PetsDbContext db = new PetsDbContext();
-
+        OrderForRegistrationViewModel viewModel = new OrderForRegistrationViewModel();
+        
         [AllowAnonymous]
         public ActionResult Login(string returnUrl = "/Home/Index")
         {
@@ -90,16 +93,19 @@ namespace HomeForPets.Controllers
         [AllowAnonymous]
         public ActionResult OrderForRegistration()
         {
-            OrderForRegistration viewModel = new OrderForRegistration();
+            List<City> cities = db.Cities.OrderBy(c => c.Name).ToList();
+            viewModel.Cities = new SelectList(cities, "CityID", "Name");
+
             return View(viewModel);
         }
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult OrderForRegistration(OrderForRegistration model, HttpPostedFileBase imageAvatar)
         {
             Image image = ImageService.SaveAvatar(imageAvatar);
-
+            
             if (ModelState.IsValid)
             {
                 db.Images.Add(image);
@@ -111,7 +117,7 @@ namespace HomeForPets.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View(model);
+            return View(viewModel);
         }
 
         private IAuthenticationManager AuthManager

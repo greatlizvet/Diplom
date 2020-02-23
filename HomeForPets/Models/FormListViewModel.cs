@@ -21,8 +21,12 @@ namespace HomeForPets.Models
         [Display(Name = "Порода")]
         public SelectList Species { get; set; }
 
+        [Display(Name = "Город")]
+        public SelectList Cities { get; set; }
+
         public int? CategoryID { get; set; }
         public int? SpecieID { get; set; }
+        public int? CityID { get; set; }
 
         [Display(Name = "Название анкеты")]
         public string Search { get; set; }
@@ -31,11 +35,12 @@ namespace HomeForPets.Models
         
         [Display(Name = "Пол")]
         public string Sex { get; set; }
-
+        
         public int? CurrentCategory { get; set; }
         public int? CurrentSpecie { get; set; }
         public string CurrentSearch { get; set; }
         public string CurrentSort { get; set; }
         public string CurrentSex { get; set; }
+        public int? CurrentCity { get; set; }
     }
 }

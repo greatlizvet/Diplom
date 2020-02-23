@@ -11,5 +11,6 @@ namespace HomeForPets.Infrastructure
     {
         SelectList Categories { get; set; }
         SelectList Species { get; set; }
+        SelectList Cities { get; set; }
     }
 }

@@ -30,6 +30,7 @@ namespace HomeForPets.Infrastructure
             PetsDbContext db = new PetsDbContext();
             List<Category> categories = db.Categories.ToList();
             List<Specie> species = db.Species.Where(s => s.CategoryID == 1).ToList();
+            List<City> cities = db.Cities.ToList();
 
             var type = model.GetType();
             if(type.Name == "FormListViewModel")
@@ -45,6 +46,7 @@ namespace HomeForPets.Infrastructure
             }
 
             model.Species = new SelectList(species, "SpecieID", "SpecieName");
+            model.Cities = new SelectList(cities, "CityID", "Name");
 
             return model;
         }
