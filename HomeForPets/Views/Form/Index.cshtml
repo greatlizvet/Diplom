@@ -10,7 +10,7 @@
         <h1>@Model.FormName</h1>
         @if (Model.AppUserId == User.Identity.GetUserId())
         {
-            @Html.ActionLink("Редактировать", "Edit", "Form", new { id = Model.FormID }, htmlAttributes: new { @class = "btn btn-default" })
+            @Html.ActionLink("Редактировать", "Edit", "Form", new { id = Model.FormID }, htmlAttributes: new { @class = "btn btn-default header" })
         }
     </div>
 </div>

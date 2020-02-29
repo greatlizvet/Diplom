@@ -23,7 +23,7 @@
                     @Html.DisplayFor(modelItem => item.OrganizationName)
                 </td>
                 <td>
-                    @Html.ActionLink("Одобрить", "ConfirmCreateUser", "Admin", new { id = item.OrderForRegistrationID }, new { @class = "btn btn-primary"}) |
+                    @Html.ActionLink("Одобрить", "ConfirmCreateUser", "Admin", new { id = item.OrderForRegistrationID }, new { @class = "btn btn-green"}) |
                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#denyModal" data-anketa-id="@item.OrderForRegistrationID">
                         Отклонить
                     </button>
@@ -50,7 +50,7 @@
                     <textarea class="form-control" id="modalForm_comment" name="comment"></textarea>
                     @Html.ValidationMessage("comment", new { @class = "text-danger" })
                     <br />
-                    <input type="submit" class="btn btn-primary" value="Подтвердить" /> |
+                    <input type="submit" class="btn btn-green" value="Подтвердить" /> |
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                 </form>
             </div>

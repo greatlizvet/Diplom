@@ -35,6 +35,11 @@ namespace HomeForPets.Controllers
                     forms = forms.Where(f => f.SpecieID == model.SpecieID);
                 }
 
+                if(model.CityID != null && model.CityID != 0)
+                {
+                    forms = forms.Where(f => f.AppUser.CityID == model.CityID);
+                }
+
                 if(!String.IsNullOrEmpty(model.Search))
                 {
                     forms = forms.Where(f => f.FormName.Contains(model.Search));

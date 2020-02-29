@@ -17,6 +17,12 @@ namespace HomeForPets.Controllers
     {
         PetsDbContext db = new PetsDbContext();
         OrderForRegistrationViewModel viewModel = new OrderForRegistrationViewModel();
+
+        public AccountController()
+        {
+            List<City> cities = db.Cities.OrderBy(c => c.Name).ToList();
+            viewModel.Cities = new SelectList(cities, "CityID", "Name");
+        }
         
         [AllowAnonymous]
         public ActionResult Login(string returnUrl = "/Home/Index")
@@ -102,7 +108,7 @@ namespace HomeForPets.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult OrderForRegistration(OrderForRegistration model, HttpPostedFileBase imageAvatar)
+        public ActionResult OrderForRegistration(OrderForRegistrationViewModel model, HttpPostedFileBase imageAvatar)
         {
             Image image = ImageService.SaveAvatar(imageAvatar);
             
@@ -110,8 +116,8 @@ namespace HomeForPets.Controllers
             {
                 db.Images.Add(image);
 
-                model.Image = image;
-                db.OrderForRegistrations.Add(model);
+                model.OrderForRegistration.Image = image;
+                db.OrderForRegistrations.Add(model.OrderForRegistration);
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");

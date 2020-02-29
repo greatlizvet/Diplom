@@ -5,6 +5,7 @@
         this.search = '';
         this.sort = 'desc';
         this.sex = '';
+        this.cityId = '';
     }
 
     SortFilterFormData.prototype.init = function () {
@@ -18,7 +19,8 @@
             + '&SpecieID=' + this.specieId
             + '&Search=' + this.search
             + '&Sort=' + this.sort
-            + '&Sex=' + this.sex;
+            + '&Sex=' + this.sex
+            + '&CityID=' + this.cityId;
         return query;
     }
 
@@ -45,6 +47,9 @@
             }
             if (paramPair[0] === 'Sex') {
                 this.sex = paramPair[1];
+            }
+            if (paramPair[0] === 'CityID') {
+                this.cityId = paramPair[1];
             }
         }
     }

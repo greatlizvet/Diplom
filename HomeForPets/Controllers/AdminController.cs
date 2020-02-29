@@ -49,6 +49,7 @@ namespace HomeForPets.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ConfirmCreateUser(CreateUserViewModel model, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
@@ -67,13 +68,19 @@ namespace HomeForPets.Controllers
                     UserName = model.OrderForRegistration.Email,
                     Email = model.OrderForRegistration.Email,
                     PhoneNumber = model.OrderForRegistration.PhoneNumber,
-                    Image = model.OrderForRegistration.Image
+                    Image = model.OrderForRegistration.Image,
+                    CityID = (int)model.OrderForRegistration.CityID
                 };
 
                 IdentityResult result = UserManager.Create(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    OrderForRegistration order = 
+                        db.OrderForRegistrations
+                        .Find(model.OrderForRegistration.OrderForRegistrationID);
+                    order.Denied = true;
+                    db.Entry(order).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
 
                     string adminId = User.Identity.GetUserId();
@@ -86,9 +93,13 @@ namespace HomeForPets.Controllers
 
                     return RedirectToAction("Index", "Order");
                 }
+                else
+                {
+                    return View("Error", result.Errors);
+                }
             }
 
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpGet]

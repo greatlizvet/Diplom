@@ -4,7 +4,7 @@
     ViewBag.Title = Model.UserName;
 }
 
-<h2>Пользователь: @Model.UserName</h2>
+<h2>Пользователь: @Model.TitleName</h2>
 
 <div>
     <hr />
@@ -18,10 +18,10 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3>@Model.UserName</h3>
+            <h3>@Model.TitleName</h3>
             <h3>Контакты</h3>
             <address>
-                Город : <br />
+                Город : @Model.City.Name<br />
                 Номер телефона : @Model.PhoneNumber <br />
                 Электронная почта : @Model.Email <br />
             </address>

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Hosting;
 using ModelDB;
+using ImageResizer;
 
 namespace HomeForPets.Models
 {
@@ -21,13 +22,32 @@ namespace HomeForPets.Models
                 {
                     if (file.ContentLength > 0 && IsImage(file))
                     {
-                        var imageName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(HostingEnvironment.MapPath("~/Content/Images"), imageName);
-                        string dbPath = "/Content/Images/" + imageName;
-                        file.SaveAs(path);
+                        //var imageName = Path.GetFileName(file.FileName);
+                        //var path = Path.Combine(HostingEnvironment.MapPath("~/Content/Images"), imageName);
+                        //string dbPath = "/Content/Images/" + imageName;
+                        //file.SaveAs(path);
+
+                        //Image savedImage = new Image { Path = dbPath };
+                        //images.Add(savedImage);
+
+                        var path = HostingEnvironment.MapPath("~/Content/Images");
+                        
+                        file.InputStream.Seek(0, SeekOrigin.Begin);
+                        
+                        ImageBuilder.Current.Build(
+                            new ImageJob(
+                                file.InputStream,
+                                path + file.FileName,
+                                new Instructions("width=320&height=220"),
+                                false,
+                                false));
+
+                        File.Move(path + file.FileName, path + DateTime.Now.ToString());
+                        string dbPath = "/Content/Images" + Path.GetFileName(file.FileName);
 
                         Image savedImage = new Image { Path = dbPath };
                         images.Add(savedImage);
+
                     }
                 }
                 else

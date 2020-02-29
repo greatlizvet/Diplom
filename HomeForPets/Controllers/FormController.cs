@@ -119,10 +119,6 @@ namespace HomeForPets.Controllers
                     images = SetImages(files);
                     newForm.Images = images;
                 }
-                else
-                {
-                    newForm.Images = form.Images;
-                }
 
                 db.Entry(newForm).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
