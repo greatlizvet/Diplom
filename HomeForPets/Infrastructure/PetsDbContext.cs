@@ -7,31 +7,24 @@ using Microsoft.AspNet.Identity;
 
 namespace HomeForPets.Infrastructure
 {
-    public class PetsDbContext : IdentityDbContext<AppUser>
+    public class ProjectDbContext : ModelDbContext
     {
-        public DbSet<Image> Images { get; set; }
-        public DbSet<Specie> Species { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Form> Forms { get; set; }
-        public DbSet<OrderForRegistration> OrderForRegistrations { get; set; }
-        public DbSet<City> Cities { get; set; }
+        public ProjectDbContext() : base("ProjectDbContext") { }
 
-        public PetsDbContext() : base("PetsDbContext") { }
-
-        static PetsDbContext()
+        static ProjectDbContext()
         {
             Database.SetInitializer(new PetsInitializer());
         }
 
-        public static PetsDbContext Create()
+        public static ProjectDbContext Create()
         {
-            return new PetsDbContext();
+            return new ProjectDbContext();
         }
     }
 
-    public class PetsInitializer : DropCreateDatabaseIfModelChanges<PetsDbContext>
+    public class PetsInitializer : DropCreateDatabaseIfModelChanges<ProjectDbContext>
     {
-        protected override void Seed(PetsDbContext context)
+        protected override void Seed(ProjectDbContext context)
         {
             var categories = new List<Category>
             {
@@ -73,7 +66,7 @@ namespace HomeForPets.Infrastructure
             base.Seed(context);
         }
 
-        public void PerformInitialSetup(PetsDbContext context)
+        public void PerformInitialSetup(ProjectDbContext context)
         {
             AppUserManager userManager = new AppUserManager(new UserStore<AppUser>(context));
             AppRoleManager roleManager = new AppRoleManager(new RoleStore<AppRole>(context));

@@ -12,7 +12,7 @@ namespace HomeForPets.Controllers
 {
     public class FormController : Controller
     {
-        PetsDbContext db = new PetsDbContext();
+        ProjectDbContext db = new ProjectDbContext();
 
         FormCreateViewModel formCreate = FormViewService.InitializeFormCreate();
         

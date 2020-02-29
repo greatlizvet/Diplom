@@ -27,7 +27,7 @@ namespace HomeForPets.Infrastructure
 
         private static IFormView InitilizeForm(IFormView model)
         {
-            PetsDbContext db = new PetsDbContext();
+            ProjectDbContext db = new ProjectDbContext();
             List<Category> categories = db.Categories.ToList();
             List<Specie> species = db.Species.Where(s => s.CategoryID == 1).ToList();
             List<City> cities = db.Cities.ToList();
@@ -53,7 +53,7 @@ namespace HomeForPets.Infrastructure
 
         private static IFormView InitilizeForm(IFormView model, int categoryId, int specieId)
         {
-            PetsDbContext db = new PetsDbContext();
+            ProjectDbContext db = new ProjectDbContext();
             List<Category> categories = db.Categories.ToList();
             List<Specie> species = db.Species.Where(s => s.CategoryID == categoryId).ToList();
 

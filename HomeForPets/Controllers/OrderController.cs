@@ -12,7 +12,7 @@ namespace HomeForPets.Controllers
     [Authorize(Roles = "Administrator")]
     public class OrderController : Controller
     {
-        PetsDbContext db = new PetsDbContext();
+        ProjectDbContext db = new ProjectDbContext();
 
         public ActionResult Index()
         {

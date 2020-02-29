@@ -6,7 +6,7 @@ namespace HomeForPets.Migrations
     using System.Linq;
     using Npgsql;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<HomeForPets.Infrastructure.PetsDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<HomeForPets.Infrastructure.ProjectDbContext>
     {
         public Configuration()
         {
@@ -14,7 +14,7 @@ namespace HomeForPets.Migrations
             ContextKey = "HomeForPets.Infrastructure.PetsDbContext";
         }
 
-        protected override void Seed(HomeForPets.Infrastructure.PetsDbContext context)
+        protected override void Seed(HomeForPets.Infrastructure.ProjectDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

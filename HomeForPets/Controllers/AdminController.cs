@@ -14,7 +14,7 @@ namespace HomeForPets.Controllers
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
-        PetsDbContext db = new PetsDbContext();
+        ProjectDbContext db = new ProjectDbContext();
         CreateUserViewModel viewModel = new CreateUserViewModel();
 
         public AdminController()

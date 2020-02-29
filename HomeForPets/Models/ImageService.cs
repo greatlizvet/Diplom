@@ -30,21 +30,20 @@ namespace HomeForPets.Models
                         //Image savedImage = new Image { Path = dbPath };
                         //images.Add(savedImage);
 
-                        var path = HostingEnvironment.MapPath("~/Content/Images");
-                        
+                        var imageName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(HostingEnvironment.MapPath("~/Content/Images"), imageName);
+                        string dbPath = "/Content/Images/" + imageName;
+
                         file.InputStream.Seek(0, SeekOrigin.Begin);
                         
                         ImageBuilder.Current.Build(
                             new ImageJob(
                                 file.InputStream,
-                                path + file.FileName,
+                                path,
                                 new Instructions("width=320&height=220"),
                                 false,
                                 false));
-
-                        File.Move(path + file.FileName, path + DateTime.Now.ToString());
-                        string dbPath = "/Content/Images" + Path.GetFileName(file.FileName);
-
+                        
                         Image savedImage = new Image { Path = dbPath };
                         images.Add(savedImage);
 

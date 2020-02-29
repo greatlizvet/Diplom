@@ -11,7 +11,7 @@ namespace HomeForPets.Controllers
 {
     public class HomeController : Controller
     {
-        PetsDbContext db = new PetsDbContext();
+        ProjectDbContext db = new ProjectDbContext();
 
         FormListViewModel formList = FormViewService.InitializeFormList();
         // GET: Home

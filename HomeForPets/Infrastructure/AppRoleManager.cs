@@ -18,7 +18,7 @@ namespace HomeForPets.Infrastructure
 
         public static AppRoleManager Create(IdentityFactoryOptions<AppRoleManager> options, IOwinContext context)
         {
-            return new AppRoleManager(new RoleStore<AppRole>(context.Get<PetsDbContext>()));
+            return new AppRoleManager(new RoleStore<AppRole>(context.Get<ProjectDbContext>()));
         }
     }
 }

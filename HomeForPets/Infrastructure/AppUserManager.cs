@@ -19,7 +19,7 @@ namespace HomeForPets.Infrastructure
 
         public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
         {
-            PetsDbContext db = context.Get<PetsDbContext>();
+            ProjectDbContext db = context.Get<ProjectDbContext>();
             AppUserManager manager = new AppUserManager(new UserStore<AppUser>(db));
 
             manager.PasswordValidator = new PasswordValidator
