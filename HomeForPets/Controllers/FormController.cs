@@ -10,13 +10,14 @@ using Microsoft.AspNet.Identity;
 
 namespace HomeForPets.Controllers
 {
+    [Authorize]
     public class FormController : Controller
     {
         ProjectDbContext db = new ProjectDbContext();
 
         FormCreateViewModel formCreate = FormViewService.InitializeFormCreate();
         
-
+        [AllowAnonymous]
         public ActionResult Index(int? id)
         {
             if(id == null)
@@ -160,7 +161,9 @@ namespace HomeForPets.Controllers
 
             if(ModelState.IsValid)
             {
-                if(files.First() != null)
+                form.UnPublished = false;
+
+                if(files != null)
                 {
                     images = SetImages(files);
                 }
@@ -168,7 +171,7 @@ namespace HomeForPets.Controllers
                 db.Entry(form).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Profile");
+                return Redirect("/Account/Index/" + User.Identity.GetUserId());
             }
 
             formCreate.Form = form;
@@ -195,9 +198,10 @@ namespace HomeForPets.Controllers
             db.Entry(form).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Account");
+            return Redirect("/Account/Index/" + User.Identity.GetUserId());
         }
 
+        [AllowAnonymous]
         public JsonResult GetSpecies(int id)
         {
             List<Specie> species = db.Species.Where(s => s.CategoryID == id).ToList();

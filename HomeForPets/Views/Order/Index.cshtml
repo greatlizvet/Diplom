@@ -23,7 +23,7 @@
                     @Html.DisplayFor(modelItem => item.OrganizationName)
                 </td>
                 <td>
-                    @Html.ActionLink("Одобрить", "ConfirmCreateUser", "Admin", new { id = item.OrderForRegistrationID }, new { @class = "btn btn-green"}) |
+                    @Html.ActionLink("Просмотреть", "ConfirmCreateUser", "Admin", new { id = item.OrderForRegistrationID }, new { @class = "btn btn-green"}) |
                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#denyModal" data-anketa-id="@item.OrderForRegistrationID">
                         Отклонить
                     </button>

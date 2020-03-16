@@ -15,12 +15,12 @@ namespace HomeForPets.Controllers
 
         FormListViewModel formList = FormViewService.InitializeFormList();
         // GET: Home
-        public ViewResult Index(FormListViewModel model, int? page)
+        public ActionResult Index(FormListViewModel model, int? page)
         {
             IQueryable<Form> unpublicForms = db.Forms.Where(f => f.UnPublished == true);
             IQueryable<Form> forms = db.Forms.Except(unpublicForms);
 
-            int pageSize = 3;
+            int pageSize = 27;
             int pageNumber = (page ?? 1);
 
             if (model != null)
@@ -54,6 +54,7 @@ namespace HomeForPets.Controllers
             formList.CurrentCategory = model.CategoryID;
             formList.CurrentSpecie = model.SpecieID;
             formList.CurrentSex = model.Sex;
+            formList.CurrentCity = model.CityID;
             formList.Forms = forms.ToPagedList(pageNumber, pageSize);
 
             return View(formList);

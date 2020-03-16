@@ -21,7 +21,12 @@
     <p>@Model.Species.SpecieName</p>
     @if (Model.AppUserId == User.Identity.GetUserId())
     {
-        @Html.ActionLink("Закрыть", "Disable", "Form", new { id = Model.FormID }, new { @class = "btn btn-danger users-form-button" })
+        if (Model.Enable != false)
+        {
+            <button type="button" class="btn btn-danger users-form-button" data-toggle="modal" data-target="#disableModal" data-anketa-id="@Model.FormID">
+                 Закрыть
+            </button>
+        }
         if (Model.UnPublished)
         {
             @Html.ActionLink("Опубликовать", "Confirm", "Form", new { id = Model.FormID }, new { @class = "btn btn-outline" })

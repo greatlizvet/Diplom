@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand brand-logo" href="/Home/Index/">
-                    <img alt="Brand" src="~/Content/Avatars/brand.png"/>
+                    <img alt="Brand" src="~/Content/Avatars/logo_brand.png"/>
                 </a>
                 @Html.ActionLink("Дом для животных", "Index", "Home", new { area = "" }, new { @class = "navbar-brand brand-text" })
             </div>
@@ -67,6 +67,7 @@
     @Scripts.Render("~/Scripts/SortAnketaForm.js")
     @Scripts.Render("~/Scripts/CRUDSpecieUpdate.js")
     @Scripts.Render("~/Scripts/DenyOrderForm.js")
+    @Scripts.Render("~/Scripts/DisableForm.js")
     @Scripts.Render("~/Scripts/GetPhoneNumberButton.js")
     @RenderSection("scripts", required: false)
 </body>

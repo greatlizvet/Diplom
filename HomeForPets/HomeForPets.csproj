@@ -322,6 +322,7 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\CRUDSpecieUpdate.js" />
     <Content Include="Scripts\DenyOrderForm.js" />
+    <Content Include="Scripts\DisableForm.js" />
     <Content Include="Scripts\GetPhoneNumberButton.js" />
     <Content Include="Scripts\HomeIndexFilterFormUpdate.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
