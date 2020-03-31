@@ -93,6 +93,10 @@
         </div>
         <div class="row">
             <div class="col-lg-12" id="paging">
+                @if(Model.Forms.PageCount == 0)
+                {
+                    <h3>Ничего не найдено</h3>
+                }
                 <div>Страница @(Model.Forms.PageCount < Model.Forms.PageNumber ? 0 : Model.Forms.PageNumber) из @Model.Forms.PageCount</div>
                 @Html.PagedListPager(Model.Forms, page => Url.Action("Index",
                     new { page,

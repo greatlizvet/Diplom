@@ -18,7 +18,9 @@ namespace HomeForPets.Controllers
         public ActionResult Index(FormListViewModel model, int? page)
         {
             IQueryable<Form> unpublicForms = db.Forms.Where(f => f.UnPublished == true);
+            IQueryable<Form> disableForms = db.Forms.Where(f => f.Enable == false);
             IQueryable<Form> forms = db.Forms.Except(unpublicForms);
+            forms = forms.Except(disableForms);
 
             int pageSize = 27;
             int pageNumber = (page ?? 1);
