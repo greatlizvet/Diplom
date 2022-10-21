@@ -1,7 +1,53 @@
-﻿
+﻿@model ModelDB.Form
+@using Microsoft.AspNet.Identity
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Анкета: " + Model.FormName;
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <h1>@Model.FormName</h1>
+        @if (Model.AppUserId == User.Identity.GetUserId())
+        {
+            @Html.ActionLink("Редактировать", "Edit", "Form", new { id = Model.FormID }, htmlAttributes: new { @class = "btn btn-default header" })
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 anketa-image-content">
+        @foreach(var img in Model.Images)
+        {
+            <img src="@img.Path" alt="Питомец"/>
+        }
+    </div>
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Порода : @Model.Species.SpecieName</p>
+                <p>Возраст : @Model.Age</p>
+                <p>Пол: @((Model.Sex == "man") ? "Мужской" : "Женский")</p>
+                <p>Окрас: @Model.Color</p>
+            </div>
+            <div class="col-lg-12 header">
+                <button type="button" class="btn btn-green" id="phoneNumber" value="@Model.AppUser.PhoneNumber">Показать номер телефона</button>
+            </div>
+            <div class="col-lg-12">
+                @Html.ActionLink("Перейти к профилю", "Index", "Account",  new { id = Model.AppUserId }, htmlAttributes: new { @class = "btn btn-default"})
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        @Html.LabelFor(model => model.Desieses, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Desieses</p>
+        @Html.LabelFor(model => model.Difficulties, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Difficulties</p>
+        @Html.LabelFor(model => model.Specificity, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Specificity</p>
+        @Html.LabelFor(model => model.Temperament, htmlAttributes: new { @class = "control-label" })
+        <p>@Model.Temperament</p>
+    </div>
+</div>
 

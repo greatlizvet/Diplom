@@ -22,3 +22,77 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.filter-div {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+
+.anketa-image-content img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.filters-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.filter {
+    margin-top: 5px;
+}
+
+.header {
+    margin-bottom: 10px;
+}
+
+.sort {
+    padding-left: 15px;
+}
+
+.users-form-button {
+    margin-right: 5px;
+}
+
+.brand-logo img {
+    width: 20px;
+    height: 25px;
+}
+
+.brand-text {
+    font-size: 20pt;
+    color: white;
+}
+
+.text-coloring a {
+    color: white;
+}
+
+.header-green {
+    background-color: #2ba152;
+    border-color: #1cb850;
+}
+
+.link > li > a:hover,
+.link > li > a:focus,
+.link > li > a:active {
+    text-decoration: none;
+    background-color: #27914b;
+}
+
+.btn-outline {
+    border-color: #2ba152;
+    color: #2ba152;
+    background-color: white;
+}
+
+.btn-outline:hover, .btn-green {
+    background-color: #2ba152;
+    color: white;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #27914b;
+}

@@ -1,15 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title – приложение ASP.NET</title>
+    <title>@ViewBag.Title - поиск дома животным.</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar header-green text-coloring navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,30 +20,55 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Дом, милый дом", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand brand-logo" href="/Home/Index/">
+                    <img alt="Brand" src="~/logo_brand.png"/>
+                </a>
+                @Html.ActionLink("Дом для животных", "Index", "Home", new { area = "" }, new { @class = "navbar-brand brand-text" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Добавить анкету", "Create", "Form")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Профиль <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Профиль", "Index", "Profile")</li>
-                            <li>@Html.ActionLink("Выход", "", "")</li>
-                        </ul>
-                    </li>
-                </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav link navbar-nav">
+                        <li>@Html.ActionLink("Добавить анкету", "Create", "Form")</li>
+                    </ul>
+                    <ul class="nav link navbar-nav navbar-right">
+                        @if(User.IsInRole("Administrator"))
+                        {
+                            <li><a href="/Order/Index/"><span class="glyphicon glyphicon-bell"></span></a></li>
+                        }
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Профиль", "Index", "Account", new { id = User.Identity.GetUserId() }, null)</li>
+                                <li>@Html.ActionLink("Выход", "Logout", "Account")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav link navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Войти", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Регистрация", "OrderForRegistration", "Account")</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="body-content container">
         @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/SortFilterFormData.js")
+    @Scripts.Render("~/Scripts/SpecieUpdate.js")
+    @Scripts.Render("~/Scripts/HomeIndexFilterFormUpdate.js")
+    @Scripts.Render("~/Scripts/SortAnketaForm.js")
+    @Scripts.Render("~/Scripts/CRUDSpecieUpdate.js")
+    @Scripts.Render("~/Scripts/DenyOrderForm.js")
+    @Scripts.Render("~/Scripts/DisableForm.js")
+    @Scripts.Render("~/Scripts/GetPhoneNumberButton.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

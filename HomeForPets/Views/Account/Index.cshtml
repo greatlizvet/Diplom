@@ -1,0 +1,61 @@
+﻿@model ModelDB.AppUser
+
+@{
+    ViewBag.Title = Model.UserName;
+}
+
+<h2>Пользователь: @Model.TitleName</h2>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 anketa-image-content">
+            @if (Model.Image != null)
+            {
+                <img src="@Model.Image.Path" />
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@Model.TitleName</h3>
+            <h3>Контакты</h3>
+            <address>
+                Город : @Model.City.Name<br />
+                Номер телефона : @Model.PhoneNumber <br />
+                Электронная почта : @Model.Email <br />
+            </address>
+            <h3>Анкеты</h3>
+        </div>
+    </div>
+    @if (Model.Forms != null)
+    {
+        foreach (var form in Model.Forms)
+        {
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                <div class="thumbnail">
+                    @Html.Partial("UsersForms", form)
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="modal fade" id="disableModal" tabindex="-1" role="dialog" aria-labelledby="disableModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="disableModalLabel">Закрытие анкеты</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/Form/Disable" method="post">
+                    <h3>Вы уверены, что хотите закрыть эту анкету?</h3>
+                    <input type="hidden" value="" id="modalForm_id" name="id" />
+                    <input type="submit" class="btn btn-green" value="Подтвердить" /> |
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

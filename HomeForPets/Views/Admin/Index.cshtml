@@ -1,0 +1,41 @@
+﻿@using ModelDB
+@model IEnumerable<ModelDB.AppUser>
+
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<h2>Список пользователей</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Имя пользователя
+        </th>
+        <th>
+            Email
+        </th>
+        <th></th>
+    </tr>
+    @foreach (AppUser user in Model)
+    {
+        <tr>
+            <td>
+                @user.Id
+            </td>
+            <td>
+                @user.UserName
+            </td>
+            <td>
+                @user.Email
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = user.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Удалить", "Delete", new { id = user.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>

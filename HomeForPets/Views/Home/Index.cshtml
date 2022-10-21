@@ -1,6 +1,111 @@
-﻿
+﻿@using HomeForPets.Models
+@using ModelDB
+@using PagedList.Mvc
+@model HomeForPets.Models.FormListViewModel
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
-}
+    /**/
 
-<h2>Index</h2>
+    ViewBag.Title = "Дом для животных";
+    List<Specie> species = new List<Specie>();
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Найдите дом животным прямо сейчас.</h1>
+                <h3>Найдите друга и помогите обрести ему дом всего за пару кликов!</h3>
+            </div>
+            <div class="col-lg-12">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get, htmlAttributes: new { @id = "sortAnketaForm" }))
+                {
+                    <div class="form-horizontal">
+                        <div class="sort col-lg-12 filters-button">
+                            <select class="form-control" id="Sort" name="Sort">
+                                <option value="desc" @((Model.CurrentSort == "desc") ? "selected" : "")>Сначала новые</option>
+                                <option value="asc" @((Model.CurrentSort == "asc") ? "selected" : "")>Сначала старые</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get, htmlAttributes: new { @id = "formfilter" }))
+                {
+                    <div class="form-horizontal">
+                        <div class="col-lg-2">
+                            @Html.LabelFor(model => model.Search, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Search, htmlAttributes: new { @class = "form-control", placeholder = "Поиск" })
+                        </div>
+                        <div class="col-lg-2">
+                            @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.CategoryID, Model.Categories as SelectList, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        @if (Model.CategoryID == null)
+                        {
+                            <div class="col-lg-2">
+                                @Html.LabelFor(model => model.Species, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.SpecieID, new SelectList(species, "SpecieID", "SpecieName"), htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-2">
+                                @Html.LabelFor(model => model.Species, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.SpecieID, Model.Categories as SelectList, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        }
+                        <div class="col-lg-2">
+                            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label" })
+                            <select class="form-control" id="Sex" name="Sex">
+                                <option value="">Все</option>
+                                <option value="man">Мужской</option>
+                                <option value="woman">Женский</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            @Html.LabelFor(model => model.Cities, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.CityID, Model.Cities as SelectList, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-outline filter">
+                                Фильтр
+                            </button>
+                            @Html.ActionLink("Очистить", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-default filter" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-12" id="forms">
+                @foreach (var m in Model.Forms)
+                {
+                    if (!m.UnPublished && m.Enable)
+                    {
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                            <div class="thumbnail">
+                                @Html.Partial("PartialAnketa", m)
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" id="paging">
+                @if(Model.Forms.PageCount == 0)
+                {
+                    <h3>Ничего не найдено</h3>
+                }
+                <div>Страница @(Model.Forms.PageCount < Model.Forms.PageNumber ? 0 : Model.Forms.PageNumber) из @Model.Forms.PageCount</div>
+                @Html.PagedListPager(Model.Forms, page => Url.Action("Index",
+                    new { page,
+                        Sort = Model.CurrentSort,
+                        Search = Model.CurrentSearch,
+                        CategoryID = Model.CurrentCategory,
+                        SpecieID = Model.CurrentSpecie,
+                        Sex = Model.CurrentSex}))
+            </div>
+        </div>
+    </div>
+</div>
